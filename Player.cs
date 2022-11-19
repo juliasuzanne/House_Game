@@ -10,14 +10,12 @@ public class Player : MonoBehaviour
     SpriteRenderer sp;
     Rigidbody2D rb;
     public Animator animator;
-    private Inventory inventory;
     // Start is called before the first frame update
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
-        inventory = new Inventory();
     }
     void Start()
     {

@@ -6,7 +6,7 @@ public class Pickup : MonoBehaviour
 {
     private Inventory inventory;
     public GameObject itemButton;
-    public GameObject clicked_Object;
+    private GameObject clicked_Object;
     private GameObject player;
     private float distance;
     public float pickup_distance;
@@ -45,7 +45,7 @@ public class Pickup : MonoBehaviour
         Debug.Log(clicked_Object.name);
         distance = GameObject.FindGameObjectWithTag("ClickManager").GetComponent<ClickManager>().Distance();
         print("distance is "+ distance + " from " + clicked_Object);
-        if (distance < 2){
+        if (distance < pickup_distance){
             for (int i= 0; i < inventory.slots.Length; i++)
             {
                 if (inventory.isFull[i] == false) {

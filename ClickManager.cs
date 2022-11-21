@@ -8,6 +8,13 @@ public class ClickManager : MonoBehaviour
     private Transform player;
     public GameObject clicked;
 
+    // bool dragging = false;
+    // GameObject drag_element;
+
+    // Vector3 mouse_position;
+    // Vector3 previous_mouse_position;
+
+
     void Awake() {
 
     }

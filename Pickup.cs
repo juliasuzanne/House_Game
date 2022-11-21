@@ -61,5 +61,6 @@ public class Pickup : MonoBehaviour
             GameObject.FindGameObjectWithTag("ClickManager").GetComponent<ClickManager>().clicked = null;
         }
     }
+
 }
 

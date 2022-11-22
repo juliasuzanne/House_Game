@@ -5,24 +5,25 @@ using UnityEngine.UI;
 
 public class Button : MonoBehaviour
 {
-    private Inventory inventory;
-    public int score;
-    public GameObject image;
-    private GameObject added_image;
-    public int target_slot;
+    public Image m_Image;
+    public Sprite m_Sprite;
+    public Inventory inventory;
 
-
-    private void Start()
+    void Start()
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
 
+        //Fetch the Image from the GameObject
+
     }
 
-    void Update() {
-        Instantiate(added_image, inventory.slots[target_slot].transform, false);
+    void Update(){
     }
 
     public void ChangeImage(){
-        added_image = image;
+        //Press space to change the Sprite of the Image
+            m_Image.sprite = m_Sprite;
+            print(inventory.slots[1]);
+
     }
 }

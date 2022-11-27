@@ -4,14 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Slot : MonoBehaviour
+
 {
-    public Image m_Image;
-    public Sprite m_Sprite;
+    public int slot;
     private Inventory inventory;
+    // public Sprite m_Sprite_Rock;
+    // public Sprite m_Sprite_Rock_Band;
+    // public Sprite m_Sprite_Band;
+    // private Image m_Image;
+ 
     // Start is called before the first frame update
     void Start()
     {
-        
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
     }
 
@@ -21,13 +25,21 @@ public class Slot : MonoBehaviour
         
     }
 
-    public void CombineItem(){
-    }
+    // public void CombineItem(){
+    //     foreach (Transform child in transform){
+    //         // child.sprite = rb_Sprite;
+    //         m_Image = child.GetComponent<Image>();
+    //         m_Image.sprite = m_Sprite_Rock_Band;
+    //         }
+    //     }
 
     public void DropItem(){
         foreach (Transform child in transform){
+            child.GetComponent<Spawn>().SpawnItem();
             GameObject.Destroy(child.gameObject);
-            inventory.isFull[0] = false;
+            inventory.isFull[slot - 1] = false;
+            inventory.items[slot -1] = null;
+
         }
     }
 }

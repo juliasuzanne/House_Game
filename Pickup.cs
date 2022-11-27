@@ -24,22 +24,6 @@ public class Pickup : MonoBehaviour
         }
     }
 
-    // void OnTriggerEnter2D(Collider2D other) {
-    //     if (other.CompareTag("Player")) {
-    //         Debug.Log("collision!");
-    //         Debug.Log(clicked_Object);
-    //             for (int i= 0; i < inventory.slots.Length; i++)
-    //             {
-    //                 if (inventory.isFull[i] == false) {
-    //                     //ITEM CAN BE ADDED
-    //                     inventory.isFull[i] = true;
-    //                     Instantiate(itemButton, inventory.slots[i].transform, false); // false = not world coordinates
-    //                     Destroy(gameObject);
-    //                     break;
-    //                 }
-    //             }
-    //     }
-    // }
 
     void checkClicked() {
         Debug.Log(clicked_Object.name);
@@ -53,6 +37,7 @@ public class Pickup : MonoBehaviour
                     inventory.isFull[i] = true;
                     Instantiate(itemButton, inventory.slots[i].transform, false); // false = not world coordinates
                     Destroy(gameObject);
+                    inventory.items[i] = itemButton;
                     break;
                 }
             }

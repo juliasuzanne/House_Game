@@ -8,9 +8,6 @@ public class Slot : MonoBehaviour
 {
     public int slot;
     private Inventory inventory;
-    // public Sprite m_Sprite_Rock;
-    // public Sprite m_Sprite_Rock_Band;
-    // public Sprite m_Sprite_Band;
     // private Image m_Image;
  
     // Start is called before the first frame update
@@ -38,8 +35,9 @@ public class Slot : MonoBehaviour
             child.GetComponent<Spawn>().SpawnItem();
             GameObject.Destroy(child.gameObject);
             inventory.isFull[slot - 1] = false;
-            inventory.items[slot -1] = null;
+            inventory.items[slot -1 ] = null;
 
         }
     }
+
 }

@@ -9,6 +9,7 @@ public class Button : MonoBehaviour
     public Sprite m_Sprite;
     public Inventory inventory;
     private GameObject clicked_Object;
+    public int slot;
     
     void Start()
     {

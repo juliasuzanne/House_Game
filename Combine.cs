@@ -8,7 +8,7 @@ public class Combine : MonoBehaviour
     public GameObject rock;
     public GameObject band;
     public GameObject rockBand;
-    public GameObject slot;
+    public int slot;
     // Start is called before the first frame update
 
       void Start()
@@ -24,19 +24,22 @@ public class Combine : MonoBehaviour
                     foreach (Transform child in inventory.slots[i].transform){
                     GameObject.Destroy(child.gameObject);
                 }
-                  for (int s= 0; s < inventory.items.Length; s++){
-                    if (inventory.items[s] = gameObject)
+                    // inventory.isFull[s] = false;
+                    // inventory.items[s] = null;
+                    slot = gameObject.transform.parent.GetComponent<Slot>().slot;
+                    print("SLOT NUMBER: " + slot);
+                    inventory.items[slot - 1 ] = null;
+                    inventory.isFull[slot - 1] = false;
                     Destroy(gameObject);
-                    inventory.isFull[s] = false;
-                    inventory.items[s] = null;
-                  }
-                    print(inventory.slots[i].transform);
+                    //print(inventory.slots[i].transform);
                     Instantiate(rockBand, inventory.slots[i].transform, false); // false = not world coordinates
                     inventory.items[i] = null;
+                    inventory.isFull[i] = false;
                     inventory.items[i] = rockBand;
                     inventory.isFull[i] = true;
                     break;
                 }
+
             }
     }
 }

@@ -5,7 +5,10 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     private Inventory inventory;
-    public GameObject itemButton;
+    private UIManager _uiManager;
+
+    [SerializeField]
+    private int pickup_id;
     private GameObject clicked_Object;
     private GameObject player;
     private float distance;
@@ -17,11 +20,12 @@ public class Pickup : MonoBehaviour
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         player = GameObject.FindGameObjectWithTag("Player");
-        // _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
 
-        // if (_uiManager == null){
-        //     Debug.LogError("The UIManager is NULL");
-        // }
+        if (_uiManager == null)
+        {
+            Debug.LogError("The UIManager is NULL");
+        }
     }
 
     void Update()
@@ -41,26 +45,16 @@ public class Pickup : MonoBehaviour
         print("distance is " + distance + " from " + clicked_Object);
         if (distance < pickup_distance)
         {
-            for (int i = 0; i < inventory.slots.Length; i++)
-            {
-                if (inventory.isFull[i] == false)
-                {
-                    //ITEM CAN BE ADDED
-                    inventory.isFull[i] = true;
-                    Instantiate(itemButton, inventory.slots[i].transform, false); // false = not world coordinates
-                    Destroy(gameObject);
-                    inventory.items[i] = itemButton;
+            _uiManager.AddToInventory(pickup_id);
+            Destroy(this.gameObject);
 
-                    // _uiManager.UpdateInventory(itemButton, i);
-                    break;
-                }
-            }
         }
         else
         {
             GameObject.FindGameObjectWithTag("ClickManager").GetComponent<ClickManager>().clicked = null;
         }
     }
+
 
 }
 

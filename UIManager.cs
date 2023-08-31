@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _inventoryUI;
 
+    private Image _item;
+
     GameManager _gameManager;
 
     private GameObject player;
@@ -78,6 +80,13 @@ public class UIManager : MonoBehaviour
             _inventoryUI.SetActive(true);
 
         }
+    }
+
+    public void AddToInventory(int child)
+    {
+        _item = _inventoryUI.transform.GetChild(child).GetComponent<Image>();
+        _item.color = new Color(255, 255, 255, 1f);
+
     }
 
 

@@ -46,7 +46,7 @@ public class Pickup : MonoBehaviour
         if (distance < pickup_distance)
         {
             _uiManager.AddToInventory(pickup_id);
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
 
         }
         else

@@ -86,6 +86,19 @@ public class UIManager : MonoBehaviour
     {
         _item = _inventoryUI.transform.GetChild(child).GetComponent<Image>();
         _item.color = new Color(255, 255, 255, 1f);
+        switch (child)
+        {
+            case 2:
+                so.leaf = true;
+                break;
+            case 1:
+                so.band = true;
+                break;
+            case 0:
+                so.rock = true;
+                break;
+
+        }
 
     }
 

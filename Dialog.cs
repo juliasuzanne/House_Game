@@ -10,7 +10,7 @@ public class Dialog : MonoBehaviour
     [SerializeField]
     private Text _playerText;
     [SerializeField]
-    int _scalemove;
+    private Text _NPCText;
     [SerializeField]
 
 
@@ -34,6 +34,6 @@ public class Dialog : MonoBehaviour
 
     public void StartTalking()
     {
-
+        Debug.Log("Started Talking");
     }
 }

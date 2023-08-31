@@ -134,7 +134,6 @@ public class UIManager : MonoBehaviour
         if (so.rock == true)
         {
             MakeInventoryUIVisible(0);
-            // _pickups.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
             _pickups.transform.GetChild(0).gameObject.SetActive(false);
         }
         else

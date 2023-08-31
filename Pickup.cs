@@ -14,6 +14,8 @@ public class Pickup : MonoBehaviour
     private float distance;
     // public GameObject _uiManager;
     public float pickup_distance;
+    public SaveObject so;
+
 
 
     private void Start()
@@ -26,6 +28,7 @@ public class Pickup : MonoBehaviour
         {
             Debug.LogError("The UIManager is NULL");
         }
+
     }
 
     void Update()
@@ -54,7 +57,6 @@ public class Pickup : MonoBehaviour
             GameObject.FindGameObjectWithTag("ClickManager").GetComponent<ClickManager>().clicked = null;
         }
     }
-
 
 }
 

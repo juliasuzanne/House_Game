@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     GameManager _gameManager;
 
     private GameObject player;
+    private GameObject _pickups;
+
     private Inventory inventory;
 
 
@@ -29,6 +31,8 @@ public class UIManager : MonoBehaviour
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         player = GameObject.FindGameObjectWithTag("Player");
+
+        _pickups = GameObject.FindGameObjectWithTag("Pickups");
         _panel.gameObject.SetActive(false);
         _inventoryUI.gameObject.SetActive(false);
 
@@ -36,6 +40,10 @@ public class UIManager : MonoBehaviour
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         if (_gameManager == null)
+        {
+            Debug.LogError("The GameManager is NULL");
+        }
+        if (_pickups == null)
         {
             Debug.LogError("The GameManager is NULL");
         }
@@ -70,6 +78,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowInventory()
     {
+
         if (_inventoryUI.activeSelf == true)
         {
             _inventoryUI.SetActive(false);
@@ -84,8 +93,25 @@ public class UIManager : MonoBehaviour
 
     public void AddToInventory(int child)
     {
+        MakeInventoryUIVisible(child);
+        ChangeSOInventory(child);
+
+    }
+
+    void MakeInventoryUIVisible(int child)
+    {
         _item = _inventoryUI.transform.GetChild(child).GetComponent<Image>();
         _item.color = new Color(255, 255, 255, 1f);
+    }
+
+    void MakeInventoryUIShadow(int child)
+    {
+        _item = _inventoryUI.transform.GetChild(child).GetComponent<Image>();
+        _item.color = new Color(0, 0, 0, 0.6f);
+    }
+
+    void ChangeSOInventory(int child)
+    {
         switch (child)
         {
             case 2:
@@ -99,15 +125,52 @@ public class UIManager : MonoBehaviour
                 break;
 
         }
-
     }
-
 
     public void LoadGame()
     {
         so = SaveManager.Load();
+
+        if (so.rock == true)
+        {
+            MakeInventoryUIVisible(0);
+            // _pickups.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+            _pickups.transform.GetChild(0).gameObject.SetActive(false);
+        }
+        else
+        {
+            MakeInventoryUIShadow(0);
+            _pickups.transform.GetChild(0).gameObject.SetActive(true);
+
+        }
+        if (so.band == true)
+        {
+            MakeInventoryUIVisible(1);
+            _pickups.transform.GetChild(1).gameObject.SetActive(false);
+
+        }
+        else
+        {
+            MakeInventoryUIShadow(1);
+            _pickups.transform.GetChild(1).gameObject.SetActive(true);
+
+
+        }
+        if (so.leaf == true)
+        {
+            MakeInventoryUIVisible(2);
+            _pickups.transform.GetChild(2).gameObject.SetActive(false);
+        }
+        else
+        {
+            MakeInventoryUIShadow(2);
+            _pickups.transform.GetChild(2).gameObject.SetActive(true);
+        }
+
+
         // UpdateLives(so.playerLives);
         // _score = so.playerPoints;
+
 
     }
 

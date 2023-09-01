@@ -11,14 +11,16 @@ public class Dialog : MonoBehaviour
     private Text _playerText;
     [SerializeField]
     private Text _NPCText;
-    [SerializeField]
+    private int _case;
+
+
 
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         _playerText.gameObject.SetActive(true);
-        _playerText.text = "Hello! How are you?";
+        this.gameObject.transform.GetChild(2).gameObject.SetActive(false);
 
 
     }
@@ -26,14 +28,68 @@ public class Dialog : MonoBehaviour
     void Update()
     {
         Vector2 playerPos = new Vector2(player.position.x, player.position.y);
-
-        Debug.Log("text: " + _playerText.gameObject.transform.position);
-
         _playerText.gameObject.transform.position = playerPos;
+
+
     }
+
+    public void AdvanceCases()
+
+    {
+        _case = _case + 1;
+
+    }
+
 
     public void StartTalking()
     {
-        Debug.Log("Started Talking");
+
+
+        switch (_case)
+        {
+            case 0:
+                _playerText.gameObject.SetActive(true);
+                _NPCText.gameObject.SetActive(false);
+                _playerText.text = "Hello";
+                this.gameObject.transform.GetChild(2).gameObject.SetActive(true);
+
+
+                break;
+            case 1:
+                _playerText.gameObject.SetActive(false);
+                _NPCText.gameObject.SetActive(true); _NPCText.text = "Hello";
+                break;
+            case 2:
+                _NPCText.text = "...";
+                _playerText.gameObject.SetActive(true);
+                _NPCText.gameObject.SetActive(false); _playerText.text = "This is my first time here.";
+                break;
+            case 3:
+                _playerText.gameObject.SetActive(false);
+                _NPCText.gameObject.SetActive(true); _NPCText.text = "Do you need help?";
+                _playerText.text = "...";
+                break;
+            case 4:
+                _playerText.gameObject.SetActive(false);
+                _NPCText.gameObject.SetActive(false);
+                this.gameObject.transform.GetChild(2).gameObject.SetActive(false);
+
+                _case = -1;
+
+                break;
+
+        }
+
+        Debug.Log("Case: " + +_case);
     }
+
+
+
+
+
+
+
+
 }
+
+

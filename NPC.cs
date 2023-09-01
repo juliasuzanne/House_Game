@@ -25,6 +25,7 @@ public class NPC : MonoBehaviour
         if (clicked_Object == gameObject)
         {
             _dialog.StartTalking();
+            clicked_Object = null;
         }
     }
 

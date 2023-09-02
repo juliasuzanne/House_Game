@@ -43,7 +43,7 @@ public class Pickup : MonoBehaviour
 
     void checkClicked()
     {
-        Debug.Log(clicked_Object.name);
+        // Debug.Log(clicked_Object.name);
         distance = GameObject.FindGameObjectWithTag("ClickManager").GetComponent<ClickManager>().Distance();
         print("distance is " + distance + " from " + clicked_Object);
         if (distance < pickup_distance)

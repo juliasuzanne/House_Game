@@ -40,13 +40,13 @@ public class ClickManager : MonoBehaviour
             if (hit.collider != null)
             {
                 clicked = hit.collider.gameObject;
-                Debug.Log(hit.collider.gameObject.name);
+                // Debug.Log(hit.collider.gameObject.name);
                 t = hit.collider.gameObject.transform;
                 player = GameObject.FindGameObjectWithTag("Player").transform;
                 //print(player.name + " is " + Distance().ToString() + " units from " + hit.collider.gameObject.name);
             }
         }
-        Debug.Log(clicked);
+        // Debug.Log(clicked);
     }
 
     public float Distance()

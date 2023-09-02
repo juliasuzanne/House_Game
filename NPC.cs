@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-    private GameObject clicked_Object;
+    public GameObject clicked_Object;
+    public ClickManager clickManager;
+
     private Dialog _dialog;
 
     // Start is called before the first frame update
@@ -14,18 +16,23 @@ public class NPC : MonoBehaviour
 
         Debug.Log("Get Dialog: " + _dialog);
 
-        //  clicked_Object = GameObject.FindGameObjectWithTag("ClickManager").GetComponent<ClickManager>().clicked;
     }
 
     // Update is called once per frame
     void Update()
     {
         clicked_Object = GameObject.FindGameObjectWithTag("ClickManager").GetComponent<ClickManager>().clicked;
+        clickManager = GameObject.FindGameObjectWithTag("ClickManager").GetComponent<ClickManager>();
 
         if (clicked_Object == gameObject)
         {
+            clickManager.MakeNull();
             _dialog.StartTalking();
-            clicked_Object = null;
+
+        }
+        else
+        {
+
         }
     }
 

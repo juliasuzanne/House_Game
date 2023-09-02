@@ -23,6 +23,12 @@ public class ClickManager : MonoBehaviour
 
     }
 
+    public void MakeNull()
+    {
+        clicked = null;
+    }
+
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -40,6 +46,7 @@ public class ClickManager : MonoBehaviour
                 //print(player.name + " is " + Distance().ToString() + " units from " + hit.collider.gameObject.name);
             }
         }
+        Debug.Log(clicked);
     }
 
     public float Distance()

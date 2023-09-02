@@ -38,6 +38,8 @@ public class Dialog : MonoBehaviour
 
     private bool runRoutine = true;
 
+    public GameObject clicked_Object;
+
 
 
 
@@ -52,6 +54,7 @@ public class Dialog : MonoBehaviour
         _NPCText.gameObject.SetActive(true);
         _AText = this.gameObject.transform.GetChild(2).GetChild(0).GetChild(0).gameObject.transform.GetComponent<TMPro.TextMeshProUGUI>();
         _BText = this.gameObject.transform.GetChild(2).GetChild(1).GetChild(0).gameObject.transform.GetComponent<TMPro.TextMeshProUGUI>();
+
 
     }
 
@@ -73,6 +76,7 @@ public class Dialog : MonoBehaviour
 
     public void StartTalking()
     {
+
         if (runRoutine == true)
         {
             StartCoroutine("MoveThroughDialogue");
@@ -93,10 +97,57 @@ public class Dialog : MonoBehaviour
 
     }
 
+    private IEnumerator TalkThenPanel(int playNum, int NPCNum, int panelNum)
+    {
+        PlayerTalking();
+        _panel.SetActive(false);
+        _playerText.text = PlayerText_string[playNum];
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        // NPC 3
+        NPCTalking();
+        _NPCText.text = NPCText_string[NPCNum];
+        _panel.SetActive(true);
+        _AText.text = PlayerText_OptionA[panelNum];
+        _BText.text = PlayerText_OptionB[panelNum];
+        var waitForButton = new WaitForUIButtons(AButton, BButton);
+        yield return waitForButton.Reset();
+    }
+
+    private IEnumerator TalkThenNPCEndConvo(int playNum, int NPCnum)
+    {
+        //PLAYER 3
+        PlayerTalking();                                                        //ENABLE PLAYER SPEECH, DISABLE NPC SPEECH
+        _panel.SetActive(false);                                                 //DISABLE PANEL
+        _playerText.text = PlayerText_string[playNum];                           //SET PLAYER TEXT FROM ARRAY
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));          //WAIT FOR USER TO CLICK
+        NPCTalking();
+        _NPCText.text = NPCText_string[NPCnum];
+        runRoutine = true;                                                      //RESET TO BE ABLE TO RESTART CONVO
+        _playerText.gameObject.SetActive(false);                                 //HIDE PLAYER BUBBLE
+        _panel.SetActive(false);
+        yield break;
+
+    }
+    private IEnumerator TalkThenPlayerEndConvo(int playNum)
+    {
+        //PLAYER 3
+        PlayerTalking();                                                        //ENABLE PLAYER SPEECH, DISABLE NPC SPEECH
+        _panel.SetActive(false);                                                 //DISABLE PANEL
+        _playerText.text = PlayerText_string[playNum];                           //SET PLAYER TEXT FROM ARRAY
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));          //WAIT FOR USER TO CLICK
+
+        runRoutine = true;                                                      //RESET TO BE ABLE TO RESTART CONVO
+        _NPCText.gameObject.SetActive(false);                                 //HIDE NPC BUBBLE
+        _panel.SetActive(false);
+        yield break;
+
+    }
+
     private IEnumerator MoveThroughDialogue()
     {
         runRoutine = false;
 
+        // NPC 0
         _NPCText.text = NPCText_string[0];
         // PANEL 0 OPTIONS
         _AText.text = PlayerText_OptionA[0];
@@ -104,89 +155,97 @@ public class Dialog : MonoBehaviour
         //CLICK TO REVEAL PANEL
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         _panel.SetActive(true);
-
         var waitForButton = new WaitForUIButtons(AButton, BButton);
         yield return waitForButton.Reset();
         // A 0 BUTTON PRESSED
         if (waitForButton.PressedButton == AButton)
         {
-
-            //PLAYER SPEAKS OPTION 1
+            // StartCoroutine("TalkThenPanel(0, 1, 1)");
+            PlayerTalking();
+            _panel.SetActive(false);
             _playerText.text = PlayerText_string[0];
-
-            //PLAYER SPEAK SETUP
-            //Debug.Log("A Button Pressed");
-            // PlayerTalking();
-            // NEED DISABLE PANEL 1 BUTTONS
-            // _panel.SetActive(false);
-            //TESTING ^^
-
-            //WAIT FOR USER TO CLICK
-            //yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-            yield return new WaitForSeconds(0.5f);
-            // NPC SPEAKS
-            // NPCTalking();
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+            // NPC 3
+            NPCTalking();
             _NPCText.text = NPCText_string[1];
-            //ENABLE PANEL
-            // _panel.SetActive(true);
-            //SET PANEL TEXT
+            _panel.SetActive(true);
             _AText.text = PlayerText_OptionA[1];
             _BText.text = PlayerText_OptionB[1];
-            //WAIT FOR USER INPUT
             waitForButton = new WaitForUIButtons(AButton, BButton);
             yield return waitForButton.Reset();
+
+
             // A 1 BUTTON PRESSED
             if (waitForButton.PressedButton == AButton)
             {
-                //PLAYER SPEAK SETUP
-                //Debug.Log("A Button Pressed");
-                // PlayerTalking();
-                // NEED DISABLE PANEL 1 BUTTONS
-                _panel.SetActive(false);
-                //TESTING ^^
-
-                //PLAYER SPEAKS OPTION 1
-                PlayerTalking();
-                _playerText.text = PlayerText_string[1];
-                //WAIT FOR USER TO CLICK
-                //yield return new WaitForSeconds(1.2f);
-                yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-                //END OF THREAD
-                // yield return new WaitForSeconds(0.1f);
-                runRoutine = true;
+                // StartCoroutine("TalkThenPlayerEndConvo(1)");
+                // //END OF THREAD
+                PlayerTalking();                                                        //ENABLE PLAYER SPEECH, DISABLE NPC SPEECH
+                _panel.SetActive(false);                                                 //DISABLE PANEL
+                _playerText.text = PlayerText_string[1];                           //SET PLAYER TEXT FROM ARRAY
+                yield return new WaitForSeconds(2.0f);
                 _playerText.gameObject.SetActive(false);
-
+                runRoutine = true;                                                      //RESET TO BE ABLE TO RESTART CONVO
+                _panel.SetActive(false);
                 yield break;
-
-                //END OF THREAD
 
 
             }
             // B 1 BUTTON PRESSED
             else
             {
-                //PLAYER SPEAK SETUP
-                //Debug.Log("A Button Pressed");
+                //PLAYER STRING 5
+                // StartCoroutine("TalkThenPanel(5, 3, 3)");
                 PlayerTalking();
-                // NEED DISABLE PANEL 1 BUTTONS
                 _panel.SetActive(false);
-                //TESTING ^^
-
-                //PLAYER SPEAKS OPTION 1
                 _playerText.text = PlayerText_string[5];
-                //WAIT FOR USER TO CLICK
-                //yield return new WaitForSeconds(1.2f);
                 yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-                // NPC SPEAKS
+                // NPC 3
                 NPCTalking();
                 _NPCText.text = NPCText_string[3];
-                //ENABLE PANEL
                 _panel.SetActive(true);
-                //SET PANEL TEXT
                 _AText.text = PlayerText_OptionA[3];
                 _BText.text = PlayerText_OptionB[3];
-                //WAIT FOR USER INPUT
-                yield break;
+                waitForButton = new WaitForUIButtons(AButton, BButton);
+                yield return waitForButton.Reset();
+
+                // A 3 BUTTON PRESSED
+                if (waitForButton.PressedButton == AButton)
+                {
+                    // StartCoroutine("TalkThenEndConvo(3, 4)");                                         //PLAYER, NPC
+                    PlayerTalking();                                                        //ENABLE PLAYER SPEECH, DISABLE NPC SPEECH
+                    _panel.SetActive(false);                                                 //DISABLE PANEL
+                    _playerText.text = PlayerText_string[3];                           //SET PLAYER TEXT FROM ARRAY
+                    yield return new WaitUntil(() => Input.GetMouseButtonDown(0));          //WAIT FOR USER TO CLICK
+                    NPCTalking();
+                    _NPCText.text = NPCText_string[4];
+                    yield return new WaitForSeconds(2.0f);
+
+                    runRoutine = true;                                                      //RESET TO BE ABLE TO RESTART CONVO
+                    _playerText.gameObject.SetActive(false);                                 //HIDE PLAYER BUBBLE
+                    _NPCText.gameObject.SetActive(false);                                 //HIDE PLAYER BUBBLE
+                    _panel.SetActive(false);
+                    yield break;
+
+                }
+                // B 3 BUTTON PRESSED
+                else
+                {
+                    // StartCoroutine("TalkThenEndConvo(7, 5)");                                             //PLAYER, NPC, PANEL
+                    PlayerTalking();                                                        //ENABLE PLAYER SPEECH, DISABLE NPC SPEECH
+                    _panel.SetActive(false);                                                 //DISABLE PANEL
+                    _playerText.text = PlayerText_string[7];                           //SET PLAYER TEXT FROM ARRAY
+                    yield return new WaitUntil(() => Input.GetMouseButtonDown(0));          //WAIT FOR USER TO CLICK
+                    NPCTalking();
+                    _NPCText.text = NPCText_string[5];
+                    yield return new WaitForSeconds(2.0f);
+                    runRoutine = true;                                                      //RESET TO BE ABLE TO RESTART CONVO
+                    _playerText.gameObject.SetActive(false);                                 //HIDE PLAYER BUBBLE
+                    _NPCText.gameObject.SetActive(false);
+                    _panel.SetActive(false);
+                    yield break;
+                }
+
             }
 
 
@@ -194,10 +253,59 @@ public class Dialog : MonoBehaviour
         else
         // B 0 BUTTON PRESSED
         {
+            // StartCoroutine("TalkThenPanel(4, 2, 2)");
+
             PlayerTalking();
+            _panel.SetActive(false);
             _playerText.text = PlayerText_string[4];
-            _NPCText.gameObject.SetActive(false);
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+            // NPC 3
+            NPCTalking();
+            _NPCText.text = NPCText_string[2];
+            _panel.SetActive(true);
+            _AText.text = PlayerText_OptionA[2];
+            _BText.text = PlayerText_OptionB[2];
+            waitForButton = new WaitForUIButtons(AButton, BButton);
+            yield return waitForButton.Reset();
+
+            // A 2 BUTTON PRESSED
+            if (waitForButton.PressedButton == AButton)
+            {
+                // StartCoroutine(TalkThenNPCEndConvo(2, 4));
+                PlayerTalking();                                                        //ENABLE PLAYER SPEECH, DISABLE NPC SPEECH
+                _panel.SetActive(false);                                                 //DISABLE PANEL
+                _playerText.text = PlayerText_string[2];                           //SET PLAYER TEXT FROM ARRAY
+                yield return new WaitUntil(() => Input.GetMouseButtonDown(0));          //WAIT FOR USER TO CLICK
+                NPCTalking();
+                _NPCText.text = NPCText_string[4];
+
+                yield return new WaitForSeconds(2.0f);
+
+                _playerText.gameObject.SetActive(false);                                 //HIDE PLAYER BUBBLE
+                _NPCText.gameObject.SetActive(false);                                 //HIDE NPC BUBBLE
+                _panel.SetActive(false);
+                runRoutine = true;                                                      //RESET TO BE ABLE TO RESTART CONVO
+
+                yield break;
+            }
+            // B 2 BUTTON PRESSED
+            else
+            {
+                // StartCoroutine(TalkThenNPCEndConvo(6, 4));
+                PlayerTalking();                                                        //ENABLE PLAYER SPEECH, DISABLE NPC SPEECH
+                _panel.SetActive(false);                                                 //DISABLE PANEL
+                _playerText.text = PlayerText_string[6];                           //SET PLAYER TEXT FROM ARRAY
+                yield return new WaitUntil(() => Input.GetMouseButtonDown(0));          //WAIT FOR USER TO CLICK
+                NPCTalking();
+                _NPCText.text = NPCText_string[4];
+                yield return new WaitForSeconds(2.0f);
+
+                runRoutine = true;                                                      //RESET TO BE ABLE TO RESTART CONVO
+                _playerText.gameObject.SetActive(false);                                 //HIDE PLAYER BUBBLE
+                _NPCText.gameObject.SetActive(false);                                 //HIDE NPC BUBBLE
+                _panel.SetActive(false);
+                yield break;
+            }
 
         }
 
@@ -211,60 +319,3 @@ public class Dialog : MonoBehaviour
 
 
 }
-//     {
-//         for (int i = 0; i < dialogueObject.dialogueLines.Length; i++)
-//         {
-//             dialogueText.text = dialogueObject.dialogueLines[i].dialogue;
-
-//             //The following line of code makes it so that the for loop is paused until the user clicks the left mouse button.
-//             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-//             //The following line of code makes the coroutine wait for a frame so as the next WaitUntil is not skipped
-//             yield return null;
-//         }
-//         dialogueBox.SetActive(false);
-//     }
-//         switch (_case)
-//         {
-//             case 0:
-//                 _playerText.gameObject.SetActive(true);
-//                 _NPCText.gameObject.SetActive(false);
-//                 _playerText.text = "Hello";
-//                 _AText.text = "Testing";
-//                 _BText.text = "Testing 2";
-//                 this.gameObject.transform.GetChild(2).gameObject.SetActive(true);
-//                 break;
-//             case 1:
-//                 _playerText.gameObject.SetActive(false);
-//                 _NPCText.gameObject.SetActive(true); _NPCText.text = "Hello";
-//                 break;
-//             case 2:
-//                 _NPCText.text = "...";
-//                 _playerText.gameObject.SetActive(true);
-//                 _NPCText.gameObject.SetActive(false); _playerText.text = "This is my first time here.";
-//                 break;
-//             case 3:
-//                 _playerText.gameObject.SetActive(false);
-//                 _NPCText.gameObject.SetActive(true); _NPCText.text = "Do you need help?";
-//                 _playerText.text = "...";
-//                 break;
-//             case 4:
-//                 _playerText.gameObject.SetActive(false);
-//                 _NPCText.gameObject.SetActive(false);
-//                 this.gameObject.transform.GetChild(2).gameObject.SetActive(false);
-
-//                 _case = -1;
-
-//                 break;
-
-//         }
-
-// Debug.Log("Case: " + +_case);
-//     }
-
-
-
-
-
-
-
-

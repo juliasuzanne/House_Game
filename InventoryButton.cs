@@ -21,6 +21,9 @@ public class InventoryButton : MonoBehaviour
 
     private bool moving = false;
 
+    [SerializeField]
+    private Vector3 startingPoint;
+
     private Vector3 mousePosition;
 
     private float offsetX, offsetY;
@@ -49,7 +52,8 @@ public class InventoryButton : MonoBehaviour
             transform.position = mousePosition;
         }
 
-        Debug.Log("Current SO " + current_so);
+        Debug.Log(_name + " " + transform.position);
+
     }
 
     void OnMouseDown()
@@ -57,6 +61,7 @@ public class InventoryButton : MonoBehaviour
         if (moving == true)
         {
             moving = false;
+            transform.position = startingPoint;
         }
         else if (moving == false && current_so == true)
         {
@@ -85,10 +90,10 @@ public class InventoryButton : MonoBehaviour
     {
         current_so = _uiManager.so.leaf;
 
-
         if (_name == "leaf" && _uiManager.so.leaf == true)
         {
             moving = true;
+
 
         }
         else if (_name == "leaf" && _uiManager.so.leaf == false)

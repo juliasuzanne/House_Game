@@ -19,10 +19,16 @@ public class InventoryButton : MonoBehaviour
     private Inventory inventory;
     private UIManager _uiManager;
 
+    private GameObject dialogue;
+
+    private Text player_text;
+
     private bool moving = false;
 
     [SerializeField]
     private Vector3 startingPoint;
+
+
 
     private Vector3 mousePosition;
 
@@ -36,6 +42,10 @@ public class InventoryButton : MonoBehaviour
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        dialogue = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).gameObject;
+        player_text = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).GetChild(0).gameObject.transform.GetComponent<Text>();
+
+
         if (_uiManager == null)
         {
             Debug.LogError("The UIManager is NULL");
@@ -79,6 +89,12 @@ public class InventoryButton : MonoBehaviour
 
         thisGameobjectName = gameObject.name;
         collisionGameobjectName = collision.gameObject.name;
+
+        if (collisionGameobjectName == "yarn")
+        {
+            dialogue.SetActive(true);
+            player_text.text = "yarn collision";
+        }
 
         // Debug.Log("This: " + thisGameobjectName + "collision with :" + collisionGameobjectName);
     }

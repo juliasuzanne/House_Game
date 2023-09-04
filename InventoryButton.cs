@@ -25,8 +25,6 @@ public class InventoryButton : MonoBehaviour
 
     private Text player_text;
 
-    private bool collided = false;
-
     private bool moving = false;
     private bool can_pickup = true;
 
@@ -85,29 +83,25 @@ public class InventoryButton : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (moving == true && collided == false)
+        if (moving == true)
         {
+
             transform.position = startingPoint;
             moving = false;
             can_pickup = false;
             StartCoroutine("CanPickup");
-        }
 
-        else if (moving == true && collided == true)
-        {
             if (collisionGameobjectName == "yarn")
             {
                 dialogue.SetActive(true);
                 StartCoroutine("YarnCollision");
 
             }
-
         }
 
         else if (moving == false && current_so == true && can_pickup == true)
         {
             moving = true;
-            collided = false;
 
         }
     }
@@ -125,7 +119,6 @@ public class InventoryButton : MonoBehaviour
         if (moving == true)
         {
             collisionGameobjectName = collision.gameObject.name;
-            collided = true;
             description_object.enabled = true;
             description_object.text = "Use " + gameObject.name + " with " + collisionGameobjectName;
         }
@@ -135,7 +128,6 @@ public class InventoryButton : MonoBehaviour
     void OnTriggerExit2D(Collider2D collision)
     {
         collisionGameobjectName = null;
-        collided = false;
         description_object.enabled = false;
         description_object.text = "";
 
@@ -165,13 +157,16 @@ public class InventoryButton : MonoBehaviour
 
     IEnumerator YarnCollision()
     {
-        player_text.text = "yarn collision";
         if (consumeable == true)
         {
-            Destroy(this.gameObject);
+            can_pickup = true;
+            _uiManager.MakeInventoryUIShadow(0);
+
         }
+        player_text.text = "yarn collision";
         yield return new WaitForSeconds(1f);
         dialogue.SetActive(false);
+
     }
 
 

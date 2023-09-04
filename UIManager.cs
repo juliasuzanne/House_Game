@@ -98,16 +98,28 @@ public class UIManager : MonoBehaviour
 
     }
 
-    void MakeInventoryUIVisible(int child)
-    {
-        _item = _inventoryUI.transform.GetChild(child).GetComponent<Image>();
-        _item.color = new Color(255, 255, 255, 1f);
-    }
+    // void MakeInventoryUIVisible(int child)
+    // {
+    //     _item = _inventoryUI.transform.GetChild(child).GetComponent<Image>();
+    //     _item.color = new Color(255, 255, 255, 1f);
+    // }
 
-    void MakeInventoryUIShadow(int child)
+    public void MakeInventoryUIShadow(int child)
     {
-        _item = _inventoryUI.transform.GetChild(child).GetComponent<Image>();
-        _item.color = new Color(0, 0, 0, 0.6f);
+        _inventoryUI.transform.GetChild(child).gameObject.SetActive(false);
+        switch (child)
+        {
+            case 2:
+                so.leaf = false;
+                break;
+            case 1:
+                so.band = false;
+                break;
+            case 0:
+                so.rock = false;
+                break;
+
+        }
     }
 
     void ChangeSOInventory(int child)
@@ -133,7 +145,7 @@ public class UIManager : MonoBehaviour
 
         if (so.rock == true)
         {
-            MakeInventoryUIVisible(0);
+            AddToInventory(0);
             _pickups.transform.GetChild(0).gameObject.SetActive(false);
         }
         else
@@ -144,7 +156,7 @@ public class UIManager : MonoBehaviour
         }
         if (so.band == true)
         {
-            MakeInventoryUIVisible(1);
+            AddToInventory(1);
             _pickups.transform.GetChild(1).gameObject.SetActive(false);
 
         }
@@ -157,7 +169,7 @@ public class UIManager : MonoBehaviour
         }
         if (so.leaf == true)
         {
-            MakeInventoryUIVisible(2);
+            AddToInventory(2);
             _pickups.transform.GetChild(2).gameObject.SetActive(false);
         }
         else

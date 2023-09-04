@@ -97,6 +97,13 @@ public class InventoryButton : MonoBehaviour
                 StartCoroutine("YarnCollision");
 
             }
+            else
+            {
+                dialogue.SetActive(true);
+                StartCoroutine("OtherCollision");
+
+
+            }
         }
 
         else if (moving == false && current_so == true && can_pickup == true)
@@ -169,7 +176,14 @@ public class InventoryButton : MonoBehaviour
 
     }
 
+    IEnumerator OtherCollision()
+    {
 
+        player_text.text = "That doesn't seem to have an effect";
+        yield return new WaitForSeconds(1f);
+        dialogue.SetActive(false);
+
+    }
 
 
     public void UseLeaf()

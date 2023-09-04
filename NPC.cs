@@ -24,6 +24,7 @@ public class NPC : MonoBehaviour
         clicked_Object = GameObject.FindGameObjectWithTag("ClickManager").GetComponent<ClickManager>().clicked;
         clickManager = GameObject.FindGameObjectWithTag("ClickManager").GetComponent<ClickManager>();
 
+        //ADD A VARIABLE HERE TO STOP FROM RESPONDING IF INVENTORY IS BEING USED
         if (clicked_Object == gameObject)
         {
             clickManager.MakeNull();

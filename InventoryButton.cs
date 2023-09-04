@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
+
 
 
 
@@ -23,18 +25,26 @@ public class InventoryButton : MonoBehaviour
 
     private Text player_text;
 
+    private bool collided = false;
+
     private bool moving = false;
+    private bool can_pickup = true;
+
+    private string collisionGameobjectName = "";
+
 
     [SerializeField]
     private Vector3 startingPoint;
 
-
-
     private Vector3 mousePosition;
+
+    [SerializeField]
+    private bool consumeable = false;
 
     private float offsetX, offsetY;
     public static bool mouseButtonReleased = true;
 
+    private TextMeshProUGUI description_object;
     private bool current_so;
 
 
@@ -44,7 +54,7 @@ public class InventoryButton : MonoBehaviour
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         dialogue = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).gameObject;
         player_text = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).GetChild(0).gameObject.transform.GetComponent<Text>();
-
+        description_object = transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
 
         if (_uiManager == null)
         {
@@ -60,43 +70,108 @@ public class InventoryButton : MonoBehaviour
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = Camera.main.transform.position.z + Camera.main.nearClipPlane;
             transform.position = mousePosition;
+            if (transform.position == startingPoint)
+            {
+                transform.position = startingPoint;
+                moving = false;
+            }
+
         }
 
-        Debug.Log(_name + " " + transform.position);
+        Debug.Log("pickup is " + can_pickup);
+        // Debug.Log(_name + " " + transform.position);
 
     }
 
     void OnMouseDown()
     {
-        if (moving == true)
+        if (moving == true && collided == false)
         {
-            moving = false;
             transform.position = startingPoint;
+            moving = false;
+            can_pickup = false;
+            StartCoroutine("CanPickup");
         }
-        else if (moving == false && current_so == true)
+
+        else if (moving == true && collided == true)
+        {
+            if (collisionGameobjectName == "yarn")
+            {
+                dialogue.SetActive(true);
+                StartCoroutine("YarnCollision");
+
+            }
+
+        }
+
+        else if (moving == false && current_so == true && can_pickup == true)
         {
             moving = true;
+            collided = false;
+
         }
     }
 
 
-
-
-    private void OnTriggerStay2D(Collider2D collision)
+    IEnumerator CanPickup()
     {
-        string thisGameobjectName;
-        string collisionGameobjectName;
+        transform.position = startingPoint;
+        yield return new WaitForSeconds(0.5f);
+        can_pickup = true;
 
-        thisGameobjectName = gameObject.name;
-        collisionGameobjectName = collision.gameObject.name;
-
-        if (collisionGameobjectName == "yarn")
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (moving == true)
         {
-            dialogue.SetActive(true);
-            player_text.text = "yarn collision";
+            collisionGameobjectName = collision.gameObject.name;
+            collided = true;
+            description_object.enabled = true;
+            description_object.text = "Use " + gameObject.name + " with " + collisionGameobjectName;
         }
 
-        // Debug.Log("This: " + thisGameobjectName + "collision with :" + collisionGameobjectName);
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        collisionGameobjectName = null;
+        collided = false;
+        description_object.enabled = false;
+        description_object.text = "";
+
+    }
+
+
+
+    // private void OnTriggerStay2D(Collider2D collision)
+    // {
+    //     string thisGameobjectName;
+    //     thisGameobjectName = gameObject.name;
+    //     collisionGameobjectName = collision.gameObject.name;
+
+    //     //create text child of transforms that will be activated with coroutine to show up for a certain amount of time
+
+    //     if (collisionGameobjectName == "yarn")
+    //     {
+    //         dialogue.SetActive(true);
+
+    //     }
+
+
+    //     // Debug.Log("This: " + thisGameobjectName + "collision with :" + collisionGameobjectName);
+    // }
+
+
+
+    IEnumerator YarnCollision()
+    {
+        player_text.text = "yarn collision";
+        if (consumeable == true)
+        {
+            Destroy(this.gameObject);
+        }
+        yield return new WaitForSeconds(1f);
+        dialogue.SetActive(false);
     }
 
 
@@ -106,19 +181,10 @@ public class InventoryButton : MonoBehaviour
     {
         current_so = _uiManager.so.leaf;
 
-        if (_name == "leaf" && _uiManager.so.leaf == true)
+        if (_name == "leaf" && _uiManager.so.leaf == true && can_pickup == true)
         {
+            can_pickup = false;
             moving = true;
-
-
-        }
-        else if (_name == "leaf" && _uiManager.so.leaf == false)
-        {
-
-        }
-
-        else
-        {
         }
 
 
@@ -129,20 +195,12 @@ public class InventoryButton : MonoBehaviour
 
         current_so = _uiManager.so.rock;
 
-        if (_name == "rock" && _uiManager.so.rock == true)
+        if (_name == "rock" && _uiManager.so.rock == true && can_pickup == true)
         {
+            can_pickup = false;
             moving = true;
 
-
         }
-        else if (_name == "rock" && _uiManager.so.rock == false)
-        {
-
-        }
-        else
-        {
-        }
-
 
     }
 
@@ -151,23 +209,12 @@ public class InventoryButton : MonoBehaviour
         current_so = _uiManager.so.band;
 
 
-        if (_name == "band" && _uiManager.so.band == true)
+        if (_name == "band" && _uiManager.so.band == true && can_pickup == true)
         {
-            Debug.Log("Band is Useable");
+            can_pickup = false;
             moving = true;
 
-
         }
-        else if (_name == "band" && _uiManager.so.band == false)
-        {
-            Debug.Log("Band is not Useable");
-
-        }
-        else
-        {
-            Debug.Log("Called but not working");
-        }
-
 
     }
 

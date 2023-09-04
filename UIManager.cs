@@ -93,7 +93,7 @@ public class UIManager : MonoBehaviour
 
     public void AddToInventory(int child)
     {
-        MakeInventoryUIVisible(child);
+        _inventoryUI.transform.GetChild(child).gameObject.SetActive(true);
         ChangeSOInventory(child);
 
     }

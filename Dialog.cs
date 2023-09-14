@@ -14,6 +14,7 @@ public class Dialog : MonoBehaviour
     private Text _playerText;
     [SerializeField]
     private Text _NPCText;
+    private bool collided = false;
     private int _case;
     private int _choice;
 
@@ -40,13 +41,25 @@ public class Dialog : MonoBehaviour
 
     public GameObject clicked_Object;
 
+    private UIManager _uiManager;
 
 
 
 
+
+    public void CollidedIsFalse()
+    {
+        collided = false;
+    }
+
+    public void CollidedIsTrue()
+    {
+        collided = true;
+    }
 
     private void Start()
     {
+        _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         _playerText.gameObject.SetActive(true);
         _panel = this.gameObject.transform.GetChild(2).gameObject;
@@ -77,7 +90,7 @@ public class Dialog : MonoBehaviour
     public void StartTalking()
     {
 
-        if (runRoutine == true)
+        if (runRoutine == true && collided == false)
         {
             StartCoroutine("MoveThroughDialogue");
         }
@@ -146,7 +159,7 @@ public class Dialog : MonoBehaviour
     private IEnumerator MoveThroughDialogue()
     {
         runRoutine = false;
-
+        _uiManager.HideInventory();
         // NPC 0
         _NPCText.text = NPCText_string[0];
         // PANEL 0 OPTIONS

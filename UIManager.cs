@@ -76,6 +76,12 @@ public class UIManager : MonoBehaviour
         SaveManager.Save(so);
     }
 
+    public void HideInventory()
+    {
+        _inventoryUI.SetActive(false);
+
+    }
+
     public void ShowInventory()
     {
 

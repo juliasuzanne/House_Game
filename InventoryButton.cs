@@ -22,6 +22,7 @@ public class InventoryButton : MonoBehaviour
     private UIManager _uiManager;
 
     private GameObject dialogue;
+    private Dialog _dialogueScript;
 
     private Text player_text;
 
@@ -44,6 +45,7 @@ public class InventoryButton : MonoBehaviour
 
     private TextMeshProUGUI description_object;
     private bool current_so;
+    private bool collided = true;
 
 
     void Start()
@@ -51,6 +53,7 @@ public class InventoryButton : MonoBehaviour
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         dialogue = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).gameObject;
+        _dialogueScript = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).GetComponent<Dialog>();
         player_text = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).GetChild(0).gameObject.transform.GetComponent<Text>();
         description_object = transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
 
@@ -58,6 +61,12 @@ public class InventoryButton : MonoBehaviour
         {
             Debug.LogError("The UIManager is NULL");
         }
+    }
+
+    public void GetCollided()
+    {
+        _dialogueScript.CollidedIsTrue();
+        collided = true;
     }
 
     void Update()
@@ -97,7 +106,7 @@ public class InventoryButton : MonoBehaviour
                 StartCoroutine("YarnCollision");
 
             }
-            else
+            else if (collided == true)
             {
                 dialogue.SetActive(true);
                 StartCoroutine("OtherCollision");
@@ -125,6 +134,8 @@ public class InventoryButton : MonoBehaviour
     {
         if (moving == true)
         {
+            _dialogueScript.CollidedIsTrue();
+            collided = true;
             collisionGameobjectName = collision.gameObject.name;
             description_object.enabled = true;
             description_object.text = "Use " + gameObject.name + " with " + collisionGameobjectName;
@@ -134,6 +145,8 @@ public class InventoryButton : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
+        _dialogueScript.CollidedIsFalse();
+        collided = false;
         collisionGameobjectName = null;
         description_object.enabled = false;
         description_object.text = "";

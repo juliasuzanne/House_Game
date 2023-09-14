@@ -13,7 +13,6 @@ public class NPC : MonoBehaviour
     void Start()
     {
         _dialog = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).GetComponent<Dialog>();
-
         // Debug.Log("Get Dialog: " + _dialog);
 
     }

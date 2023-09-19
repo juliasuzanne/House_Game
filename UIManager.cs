@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+using UnityEngine.EventSystems;
+
+
 public class UIManager : MonoBehaviour
 {
 
@@ -62,6 +65,7 @@ public class UIManager : MonoBehaviour
             _panel.SetActive(true);
             _gameManager.PauseGame();
         }
+
 
     }
 

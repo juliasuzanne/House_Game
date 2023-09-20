@@ -5,6 +5,8 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
     public GameObject clicked_Object;
+    private GameObject _dialogGameObject;
+
     public ClickManager clickManager;
     private Player _player;
 
@@ -13,8 +15,10 @@ public class NPC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _dialogGameObject = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).gameObject;
         _dialog = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).GetComponent<Dialog>();
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
         // Debug.Log("Get Dialog: " + _dialog);
 
     }
@@ -28,8 +32,8 @@ public class NPC : MonoBehaviour
         //ADD A VARIABLE HERE TO STOP FROM RESPONDING IF INVENTORY IS BEING USED
         if (clicked_Object == gameObject)
         {
+            _dialogGameObject.SetActive(true);
             clickManager.MakeNull();
-            _player.MoveableFalse();
             _dialog.StartTalking();
 
         }

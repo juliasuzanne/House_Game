@@ -76,7 +76,7 @@ public class Dialog : MonoBehaviour
 
     void Update()
     {
-        Vector2 playerPos = new Vector2(player.position.x, player.position.y);
+        Vector2 playerPos = new Vector2(player.position.x + 1.8f, player.position.y + 2.5f);
         _playerText.gameObject.transform.position = playerPos;
 
 
@@ -116,6 +116,7 @@ public class Dialog : MonoBehaviour
 
     private IEnumerator MoveThroughDialogue()
     {
+        NPCTalking();
         playerScript.MoveableFalse();
         runRoutine = false;
         _uiManager.HideInventory();

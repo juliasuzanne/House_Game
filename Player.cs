@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
-
+        targetPos = transform.position;
     }
 
     // Update is called once per frame
@@ -90,6 +90,8 @@ public class Player : MonoBehaviour
             {
                 animator.SetFloat("ySpeed", (0));
                 animator.SetFloat("xSpeed", Mathf.Abs(0));
+                targetPos = transform.position;
+
             }
 
         }

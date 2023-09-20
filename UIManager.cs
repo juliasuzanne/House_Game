@@ -26,7 +26,6 @@ public class UIManager : MonoBehaviour
 
     private Inventory inventory;
 
-
     public SaveObject so;
 
     // Start is called before the first frame update
@@ -195,6 +194,7 @@ public class UIManager : MonoBehaviour
             MakeInventoryUIShadow(2);
             _pickups.transform.GetChild(2).gameObject.SetActive(true);
         }
+
 
 
         // UpdateLives(so.playerLives);

@@ -51,7 +51,12 @@ public class InventoryButton : MonoBehaviour
 
     protected GameObject clicked_Object;
 
-    void Start()
+
+    public void Start()
+    {
+        Init();
+    }
+    public virtual void Init()
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();

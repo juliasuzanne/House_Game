@@ -7,5 +7,6 @@ public class SaveObject
     public bool rock;
     public bool leaf;
     public bool band;
+    public bool stairDoorOpen;
 
 }

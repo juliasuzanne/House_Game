@@ -39,9 +39,9 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && moveable == true)//if mouse is clicked
         {
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
         }
         ClickToMove();
+
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
             animator.SetFloat("ySpeed", (yDistance));
             animator.SetFloat("xSpeed", Mathf.Abs(xDistance));
             transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-            if (collided == true)
+            if (collided == true || moveable == false)
             {
                 animator.SetFloat("ySpeed", (0));
                 animator.SetFloat("xSpeed", Mathf.Abs(0));

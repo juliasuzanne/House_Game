@@ -34,6 +34,7 @@ public class NPC : MonoBehaviour
         {
             _dialogGameObject.SetActive(true);
             clickManager.MakeNull();
+            _player.MoveableFalse();
             _dialog.StartTalking();
 
         }

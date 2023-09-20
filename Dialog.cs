@@ -95,7 +95,6 @@ public class Dialog : MonoBehaviour
 
         if (runRoutine == true && collided == false)
         {
-
             StartCoroutine("MoveThroughDialogue");
         }
 
@@ -200,7 +199,6 @@ public class Dialog : MonoBehaviour
                     _NPCText.gameObject.SetActive(false);                                 //HIDE PLAYER BUBBLE
                     _panel.SetActive(false);
                     playerScript.MoveableTrue();
-
                     yield break;
 
                 }

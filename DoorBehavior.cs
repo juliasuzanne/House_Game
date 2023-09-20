@@ -7,10 +7,13 @@ public class DoorBehavior : MonoBehaviour
 
     private bool openable = false;
     private SceneSwitch _sceneManager;
+    private UIManager _uiManager;
     // Start is called before the first frame update
     void Start()
     {
+        _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _sceneManager = GameObject.Find("GameManager").GetComponent<SceneSwitch>();
+
     }
 
     // Update is called once per frame
@@ -40,5 +43,6 @@ public class DoorBehavior : MonoBehaviour
     public void OpenDoor()
     {
         openable = true;
+        _uiManager.so.stairDoorOpen = true;
     }
 }

@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
 
     private Inventory inventory;
 
+    private DoorBehavior doorBehavior;
+
     public SaveObject so;
 
     // Start is called before the first frame update
@@ -40,6 +42,8 @@ public class UIManager : MonoBehaviour
         _pickups = GameObject.FindGameObjectWithTag("Pickups");
         _panel.gameObject.SetActive(false);
         _inventoryUI.gameObject.SetActive(false);
+
+        doorBehavior = GameObject.Find("DoorOpener").GetComponent<DoorBehavior>();
 
 
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -126,6 +130,7 @@ public class UIManager : MonoBehaviour
         _inventoryUI.transform.GetChild(child).gameObject.SetActive(false);
         switch (child)
         {
+
             case 2:
                 so.leaf = false;
                 break;
@@ -155,6 +160,8 @@ public class UIManager : MonoBehaviour
 
         }
     }
+
+
 
     public void LoadGame()
     {
@@ -193,6 +200,15 @@ public class UIManager : MonoBehaviour
         {
             MakeInventoryUIShadow(2);
             _pickups.transform.GetChild(2).gameObject.SetActive(true);
+        }
+
+        if (so.stairDoorOpen == true)
+        {
+            if (doorBehavior != null)
+            {
+                doorBehavior.OpenDoor();
+            }
+
         }
 
 

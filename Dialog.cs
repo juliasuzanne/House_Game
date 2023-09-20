@@ -43,6 +43,8 @@ public class Dialog : MonoBehaviour
 
     private UIManager _uiManager;
 
+    private Player playerScript;
+
 
 
 
@@ -61,6 +63,7 @@ public class Dialog : MonoBehaviour
     {
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         _playerText.gameObject.SetActive(true);
         _panel = this.gameObject.transform.GetChild(2).gameObject;
         _panel.SetActive(false);
@@ -92,6 +95,7 @@ public class Dialog : MonoBehaviour
 
         if (runRoutine == true && collided == false)
         {
+
             StartCoroutine("MoveThroughDialogue");
         }
 
@@ -110,54 +114,9 @@ public class Dialog : MonoBehaviour
 
     }
 
-    private IEnumerator TalkThenPanel(int playNum, int NPCNum, int panelNum)
-    {
-        PlayerTalking();
-        _panel.SetActive(false);
-        _playerText.text = PlayerText_string[playNum];
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-        // NPC 3
-        NPCTalking();
-        _NPCText.text = NPCText_string[NPCNum];
-        _panel.SetActive(true);
-        _AText.text = PlayerText_OptionA[panelNum];
-        _BText.text = PlayerText_OptionB[panelNum];
-        var waitForButton = new WaitForUIButtons(AButton, BButton);
-        yield return waitForButton.Reset();
-    }
-
-    private IEnumerator TalkThenNPCEndConvo(int playNum, int NPCnum)
-    {
-        //PLAYER 3
-        PlayerTalking();                                                        //ENABLE PLAYER SPEECH, DISABLE NPC SPEECH
-        _panel.SetActive(false);                                                 //DISABLE PANEL
-        _playerText.text = PlayerText_string[playNum];                           //SET PLAYER TEXT FROM ARRAY
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));          //WAIT FOR USER TO CLICK
-        NPCTalking();
-        _NPCText.text = NPCText_string[NPCnum];
-        runRoutine = true;                                                      //RESET TO BE ABLE TO RESTART CONVO
-        _playerText.gameObject.SetActive(false);                                 //HIDE PLAYER BUBBLE
-        _panel.SetActive(false);
-        yield break;
-
-    }
-    private IEnumerator TalkThenPlayerEndConvo(int playNum)
-    {
-        //PLAYER 3
-        PlayerTalking();                                                        //ENABLE PLAYER SPEECH, DISABLE NPC SPEECH
-        _panel.SetActive(false);                                                 //DISABLE PANEL
-        _playerText.text = PlayerText_string[playNum];                           //SET PLAYER TEXT FROM ARRAY
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));          //WAIT FOR USER TO CLICK
-
-        runRoutine = true;                                                      //RESET TO BE ABLE TO RESTART CONVO
-        _NPCText.gameObject.SetActive(false);                                 //HIDE NPC BUBBLE
-        _panel.SetActive(false);
-        yield break;
-
-    }
-
     private IEnumerator MoveThroughDialogue()
     {
+        playerScript.MoveableFalse();
         runRoutine = false;
         _uiManager.HideInventory();
         // NPC 0
@@ -200,6 +159,7 @@ public class Dialog : MonoBehaviour
                 _playerText.gameObject.SetActive(false);
                 runRoutine = true;                                                      //RESET TO BE ABLE TO RESTART CONVO
                 _panel.SetActive(false);
+                playerScript.MoveableTrue();
                 yield break;
 
 
@@ -238,6 +198,8 @@ public class Dialog : MonoBehaviour
                     _playerText.gameObject.SetActive(false);                                 //HIDE PLAYER BUBBLE
                     _NPCText.gameObject.SetActive(false);                                 //HIDE PLAYER BUBBLE
                     _panel.SetActive(false);
+                    playerScript.MoveableTrue();
+
                     yield break;
 
                 }
@@ -256,6 +218,8 @@ public class Dialog : MonoBehaviour
                     _playerText.gameObject.SetActive(false);                                 //HIDE PLAYER BUBBLE
                     _NPCText.gameObject.SetActive(false);
                     _panel.SetActive(false);
+                    playerScript.MoveableTrue();
+
                     yield break;
                 }
 
@@ -298,6 +262,7 @@ public class Dialog : MonoBehaviour
                 _NPCText.gameObject.SetActive(false);                                 //HIDE NPC BUBBLE
                 _panel.SetActive(false);
                 runRoutine = true;                                                      //RESET TO BE ABLE TO RESTART CONVO
+                playerScript.MoveableTrue();
 
                 yield break;
             }
@@ -317,6 +282,8 @@ public class Dialog : MonoBehaviour
                 _playerText.gameObject.SetActive(false);                                 //HIDE PLAYER BUBBLE
                 _NPCText.gameObject.SetActive(false);                                 //HIDE NPC BUBBLE
                 _panel.SetActive(false);
+                playerScript.MoveableTrue();
+
                 yield break;
             }
 

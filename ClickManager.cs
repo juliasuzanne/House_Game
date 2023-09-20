@@ -11,15 +11,11 @@ public class ClickManager : MonoBehaviour
     private Transform player;
     public GameObject clicked;
 
-    // bool dragging = false;
-    // GameObject drag_element;
-
-    // Vector3 mouse_position;
-    // Vector3 previous_mouse_position;
-
 
     void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
 
     }
 
@@ -40,13 +36,9 @@ public class ClickManager : MonoBehaviour
             if (hit.collider != null)
             {
                 clicked = hit.collider.gameObject;
-                // Debug.Log(hit.collider.gameObject.name);
                 t = hit.collider.gameObject.transform;
-                player = GameObject.FindGameObjectWithTag("Player").transform;
-                //print(player.name + " is " + Distance().ToString() + " units from " + hit.collider.gameObject.name);
             }
         }
-        // Debug.Log(clicked);
     }
 
     public float Distance()

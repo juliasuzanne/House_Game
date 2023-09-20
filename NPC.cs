@@ -6,6 +6,7 @@ public class NPC : MonoBehaviour
 {
     public GameObject clicked_Object;
     public ClickManager clickManager;
+    private Player _player;
 
     private Dialog _dialog;
 
@@ -13,6 +14,7 @@ public class NPC : MonoBehaviour
     void Start()
     {
         _dialog = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).GetComponent<Dialog>();
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         // Debug.Log("Get Dialog: " + _dialog);
 
     }
@@ -27,6 +29,7 @@ public class NPC : MonoBehaviour
         if (clicked_Object == gameObject)
         {
             clickManager.MakeNull();
+            _player.MoveableFalse();
             _dialog.StartTalking();
 
         }

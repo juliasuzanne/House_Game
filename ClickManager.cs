@@ -41,6 +41,8 @@ public class ClickManager : MonoBehaviour
         }
     }
 
+
+
     public float Distance()
     {
         return Vector3.Distance(t.position, player.position);

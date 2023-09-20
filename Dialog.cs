@@ -116,8 +116,8 @@ public class Dialog : MonoBehaviour
 
     private IEnumerator MoveThroughDialogue()
     {
-        NPCTalking();
         playerScript.MoveableFalse();
+        NPCTalking();
         runRoutine = false;
         _uiManager.HideInventory();
         // NPC 0

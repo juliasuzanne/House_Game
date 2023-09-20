@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
 
         // mousePos.z = 0f;
 
-        if (Input.GetMouseButtonDown(0))//if mouse is clicked
+        if (Input.GetMouseButtonDown(0) && moveable == true)//if mouse is clicked
         {
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 

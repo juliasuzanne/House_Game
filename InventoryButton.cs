@@ -39,6 +39,7 @@ public class InventoryButton : MonoBehaviour
 
     [SerializeField]
     private bool consumeable = false;
+    protected Player _player;
 
     private float offsetX, offsetY;
     public static bool mouseButtonReleased = true;
@@ -48,14 +49,18 @@ public class InventoryButton : MonoBehaviour
     private bool collided = true;
 
 
+    private GameObject clicked_Object;
+
     void Start()
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         dialogue = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).gameObject;
         _dialogueScript = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).GetComponent<Dialog>();
         player_text = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).GetChild(0).gameObject.transform.GetComponent<Text>();
         description_object = transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
+        clicked_Object = GameObject.FindGameObjectWithTag("ClickManager").GetComponent<ClickManager>().clicked;
 
         if (_uiManager == null)
         {
@@ -71,7 +76,6 @@ public class InventoryButton : MonoBehaviour
 
     void Update()
     {
-
         if (moving == true)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -83,22 +87,26 @@ public class InventoryButton : MonoBehaviour
                 moving = false;
             }
 
+
+
         }
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            OnMouseDown();
+        }
+        Debug.Log("Moving is : " + moving);
         Debug.Log("pickup is " + can_pickup);
         // Debug.Log(_name + " " + transform.position);
 
+
     }
 
-    void OnMouseDown()
+    private void OnMouseDown()
     {
+        Debug.Log("Mouse Down");
         if (moving == true)
         {
-
-            transform.position = startingPoint;
-            moving = false;
-            can_pickup = false;
-            StartCoroutine("CanPickup");
 
             if (collisionGameobjectName == "yarn")
             {
@@ -113,11 +121,24 @@ public class InventoryButton : MonoBehaviour
 
 
             }
+            else
+            {
+                transform.position = startingPoint;
+                moving = false;
+                can_pickup = false;
+                StartCoroutine("CanPickup");
+            }
+
         }
 
-        else if (moving == false && current_so == true && can_pickup == true)
+        // else if (moving == false && current_so == true && can_pickup == true)
+        // {
+
+        //     moving = true;
+
+        // }
+        else
         {
-            moving = true;
 
         }
     }
@@ -128,6 +149,7 @@ public class InventoryButton : MonoBehaviour
         transform.position = startingPoint;
         yield return new WaitForSeconds(0.5f);
         can_pickup = true;
+        moving = false;
 
     }
     void OnTriggerEnter2D(Collider2D collision)

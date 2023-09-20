@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     GameManager _gameManager;
 
     private GameObject player;
+    private Player _playerScript;
     private GameObject _pickups;
 
     private Inventory inventory;
@@ -34,6 +35,8 @@ public class UIManager : MonoBehaviour
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         player = GameObject.FindGameObjectWithTag("Player");
+        _playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
 
         _pickups = GameObject.FindGameObjectWithTag("Pickups");
         _panel.gameObject.SetActive(false);
@@ -83,6 +86,7 @@ public class UIManager : MonoBehaviour
     public void HideInventory()
     {
         _inventoryUI.SetActive(false);
+        _playerScript.MoveableTrue();
 
     }
 
@@ -92,11 +96,15 @@ public class UIManager : MonoBehaviour
         if (_inventoryUI.activeSelf == true)
         {
             _inventoryUI.SetActive(false);
+            _playerScript.MoveableTrue();
+
 
         }
         else
         {
             _inventoryUI.SetActive(true);
+            _playerScript.MoveableFalse();
+
 
         }
     }

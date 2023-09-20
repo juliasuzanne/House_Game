@@ -204,9 +204,12 @@ public class UIManager : MonoBehaviour
 
         if (so.stairDoorOpen == true)
         {
+            MakeInventoryUIShadow(2);
+            _pickups.transform.GetChild(2).gameObject.SetActive(false);
             if (doorBehavior != null)
             {
                 doorBehavior.OpenDoor();
+
             }
 
         }

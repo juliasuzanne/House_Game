@@ -43,7 +43,7 @@ public class UIManager : MonoBehaviour
         _panel.gameObject.SetActive(false);
         _inventoryUI.gameObject.SetActive(false);
 
-        doorBehavior = GameObject.Find("DoorOpener").GetComponent<DoorBehavior>();
+
 
 
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -59,6 +59,13 @@ public class UIManager : MonoBehaviour
 
         so.playerLevel = SceneManager.GetActiveScene().buildIndex;
         so.playerName = "Julia";
+
+        if (so.playerLevel == 2)
+        {
+            doorBehavior = GameObject.Find("DoorOpener").GetComponent<DoorBehavior>();
+        }
+
+        LoadGame();
 
     }
 
@@ -209,7 +216,6 @@ public class UIManager : MonoBehaviour
             if (doorBehavior != null)
             {
                 doorBehavior.OpenDoor();
-
             }
 
         }

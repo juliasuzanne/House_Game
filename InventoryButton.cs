@@ -13,43 +13,43 @@ public class InventoryButton : MonoBehaviour
 {
 
     [SerializeField]
-    private string _name;
+    protected string _name;
 
     [SerializeField]
-    private Image _image;
+    protected Image _image;
 
-    private Inventory inventory;
-    private UIManager _uiManager;
+    protected Inventory inventory;
+    protected UIManager _uiManager;
 
-    private GameObject dialogue;
-    private Dialog _dialogueScript;
+    protected GameObject dialogue;
+    protected Dialog _dialogueScript;
 
-    private Text player_text;
+    protected Text player_text;
 
-    private bool moving = false;
-    private bool can_pickup = true;
+    protected bool moving = false;
+    protected bool can_pickup = true;
 
-    private string collisionGameobjectName = "";
+    protected string collisionGameobjectName = "";
 
-
-    [SerializeField]
-    private Vector3 startingPoint;
-
-    private Vector3 mousePosition;
 
     [SerializeField]
-    private bool consumeable = false;
+    protected Vector3 startingPoint;
+
+    protected Vector3 mousePosition;
+
+    [SerializeField]
+    protected bool consumeable = false;
     protected Player _player;
 
-    private float offsetX, offsetY;
+    protected float offsetX, offsetY;
     public static bool mouseButtonReleased = true;
 
-    private TextMeshProUGUI description_object;
-    private bool current_so;
-    private bool collided = true;
+    protected TextMeshProUGUI description_object;
+    protected bool current_so;
+    protected bool collided = true;
 
 
-    private GameObject clicked_Object;
+    protected GameObject clicked_Object;
 
     void Start()
     {
@@ -93,7 +93,7 @@ public class InventoryButton : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            OnMouseDown();
+            OnMousePressed();
         }
         Debug.Log("Moving is : " + moving);
         Debug.Log("pickup is " + can_pickup);
@@ -102,7 +102,7 @@ public class InventoryButton : MonoBehaviour
 
     }
 
-    private void OnMouseDown()
+    public virtual void OnMousePressed()
     {
         Debug.Log("Mouse Down");
         if (moving == true)

@@ -210,6 +210,7 @@ public class InventoryButton : MonoBehaviour
             _uiManager.MakeInventoryUIShadow(0);
 
         }
+        dialogue.SetActive(true);
         player_text.text = "yarn collision";
         yield return new WaitForSeconds(1f);
         dialogue.SetActive(false);
@@ -218,7 +219,7 @@ public class InventoryButton : MonoBehaviour
 
     IEnumerator OtherCollision()
     {
-
+        dialogue.SetActive(true);
         player_text.text = "That doesn't seem to have an effect";
         yield return new WaitForSeconds(1f);
         dialogue.SetActive(false);

@@ -35,6 +35,7 @@ public class NPC : MonoBehaviour
             _dialogGameObject.SetActive(true);
             clickManager.MakeNull();
             _player.MoveableFalse();
+            Debug.Log("Moveable false is called in NPC script");
             _dialog.StartTalking();
 
         }

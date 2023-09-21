@@ -80,6 +80,7 @@ public class Dialog : MonoBehaviour
         _playerText.gameObject.transform.position = playerPos;
 
 
+
     }
 
     public void AdvanceCases(int caseNum)
@@ -115,10 +116,11 @@ public class Dialog : MonoBehaviour
 
     private IEnumerator MoveThroughDialogue()
     {
-        playerScript.MoveableFalse();
         NPCTalking();
         runRoutine = false;
         _uiManager.HideInventory();
+        playerScript.MoveableFalse();
+
         // NPC 0
         _NPCText.text = NPCText_string[0];
         // PANEL 0 OPTIONS

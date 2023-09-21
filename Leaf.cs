@@ -58,6 +58,7 @@ public class Leaf : InventoryButton
         door.SetActive(true);
         Debug.Log("Door is open");
         doorBehavior.OpenDoor();
+        dialogue.SetActive(true);
         player_text.text = "The door is open!";
         _uiManager.MakeInventoryUIShadow(2);
         yield return new WaitForSeconds(1f);

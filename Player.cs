@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     //variable for amount of diamonds
     //
     public float moveSpeed;
+    private RaycastHit2D hit;
     private Vector2 targetPos;
     SpriteRenderer sp;
     private bool moveable = true;
@@ -41,7 +42,7 @@ public class Player : MonoBehaviour
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
         ClickToMove();
-
+        Debug.Log("MOVEABLE: " + moveable);
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -68,7 +69,11 @@ public class Player : MonoBehaviour
 
     void ClickToMove()
     {
-        RaycastHit2D hit = Physics2D.Raycast(targetPos, Vector2.zero);
+        if (moveable == true)
+        {
+            hit = Physics2D.Raycast(targetPos, Vector2.zero);
+
+        }
         if (hit.collider.name == "flooronly" && !EventSystem.current.IsPointerOverGameObject() && moveable == true)
         {
             float xDistance = (targetPos.x - transform.position.x);

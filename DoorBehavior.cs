@@ -24,6 +24,7 @@ public class DoorBehavior : MonoBehaviour
 
     void OnMouseDown()
     {
+        //add menu here to confirm leaving the room? or animation with the door swinging open, on hover message "go to ..."
         if (openable == true)
         {
             _sceneManager.GoInDoor();

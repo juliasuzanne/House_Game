@@ -38,13 +38,9 @@ public class UIManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         _playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
-
         _pickups = GameObject.FindGameObjectWithTag("Pickups");
         _panel.gameObject.SetActive(false);
         _inventoryUI.gameObject.SetActive(false);
-
-
-
 
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 

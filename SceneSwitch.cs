@@ -7,6 +7,9 @@ public class SceneSwitch : MonoBehaviour
 {
     public int combineSceneIndex;
     public int behindDoorSceneIndex;
+    public int oldLadyLivingRoomSceneIndex;
+
+    public int stairsSceneIndex;
 
     private UIManager _uiManager;
 
@@ -23,6 +26,13 @@ public class SceneSwitch : MonoBehaviour
         SceneManager.LoadScene(combineSceneIndex);
 
     }
+
+    public void StairScene()
+    {
+        SceneManager.LoadScene(stairsSceneIndex);
+
+    }
+
     public void GoInDoor()
     {
         _uiManager.SaveGame();
@@ -33,6 +43,17 @@ public class SceneSwitch : MonoBehaviour
         Debug.Log("Loaded Game");
 
 
+    }
+
+    public void ExitNightmare()
+    {
+        // _uiManager.SaveGame();
+        // Debug.Log("Saved Game");
+        // _uiManager.LoadGame();
+        SceneManager.LoadScene(oldLadyLivingRoomSceneIndex);
+        //     _uiManager.LoadGame();
+        //     Debug.Log("Loaded Game");
+        // 
     }
 
 

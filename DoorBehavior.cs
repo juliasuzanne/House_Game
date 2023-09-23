@@ -9,6 +9,9 @@ public class DoorBehavior : MonoBehaviour
     private SceneSwitch _sceneManager;
 
     public float pickup_distance;
+
+    public GameObject cutscene;
+
     private UIManager _uiManager;
 
     private GameObject player;
@@ -37,8 +40,7 @@ public class DoorBehavior : MonoBehaviour
             print("distance is " + distance + " from door");
             if (distance < pickup_distance)
             {
-
-                _sceneManager.GoInDoor();
+                StartCoroutine("GoInDoor");
 
             }
             else
@@ -50,6 +52,14 @@ public class DoorBehavior : MonoBehaviour
         {
 
         }
+    }
+
+    IEnumerator GoInDoor()
+    {
+        cutscene.SetActive(true);
+        yield return new WaitForSeconds(11f);
+        _sceneManager.GoInDoor();
+
     }
 
     void OnMouseUp()

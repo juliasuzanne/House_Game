@@ -64,6 +64,9 @@ public class DoorBehavior : MonoBehaviour
         mockPlayer.transform.position = Vector2.MoveTowards(mockPlayer.transform.position, new Vector3(8, 1, 0), 3 * Time.deltaTime);
         yield return new WaitForSeconds(2f);
         _sceneManager.GoInDoor();
+        cutscene.SetActive(false);
+        player.SetActive(true);
+
 
     }
 

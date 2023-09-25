@@ -39,8 +39,6 @@ public class LivingRoomScene : MonoBehaviour
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         _player.MoveableTrue();
         NPC.gameObject.SetActive(false);
-        StartTalking.enabled = true;
-
 
 
     }

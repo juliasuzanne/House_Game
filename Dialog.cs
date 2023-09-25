@@ -76,7 +76,7 @@ public class Dialog : MonoBehaviour
 
     void Update()
     {
-        Vector2 playerPos = new Vector2(player.position.x, player.position.y);
+        Vector3 playerPos = new Vector3(player.position.x, player.position.y, player.position.z);
         _playerText.gameObject.transform.position = playerPos;
 
 

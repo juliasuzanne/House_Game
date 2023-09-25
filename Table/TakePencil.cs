@@ -9,6 +9,7 @@ public class TakePencil : MonoBehaviour
     void Start()
     {
         paper = GameObject.Find("paper").GetComponent<UsePaper>();
+
     }
 
     void OnMouseDown()

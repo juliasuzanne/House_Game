@@ -56,5 +56,16 @@ public class SceneSwitch : MonoBehaviour
         // 
     }
 
+    public void ExitTable()
+    {
+        SceneManager.LoadScene(6);
+
+    }
+
+    public void GoToTable()
+    {
+        SceneManager.LoadScene(5);
+    }
+
 
 }

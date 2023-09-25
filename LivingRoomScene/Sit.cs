@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Sit : MonoBehaviour
 {
+    private SceneSwitch _sceneManager;
 
     public GameObject clicked_Object;
     private GameObject _dialogGameObject;
@@ -13,12 +14,14 @@ public class Sit : MonoBehaviour
     private GameObject _playerObject;
     private Dialog _dialog;
     private GameObject _sitPlayer;
+    private bool sitable = true;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        _sceneManager = GameObject.Find("GameManager").GetComponent<SceneSwitch>();
         _dialogGameObject = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).gameObject;
         _dialog = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).GetComponent<Dialog>();
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -37,7 +40,7 @@ public class Sit : MonoBehaviour
         clickManager = GameObject.FindGameObjectWithTag("ClickManager").GetComponent<ClickManager>();
 
         //ADD A VARIABLE HERE TO STOP FROM RESPONDING IF INVENTORY IS BEING USED
-        if (clicked_Object == gameObject)
+        if (clicked_Object == gameObject && sitable == true)
         {
             StartCoroutine("Sitting");
         }
@@ -47,11 +50,18 @@ public class Sit : MonoBehaviour
         }
     }
 
+    public void NotSitable()
+    {
+        sitable = false;
+    }
+
     IEnumerator Sitting()
     {
         _playerObject.SetActive(false);
         _sitPlayer.SetActive(true);
         yield return new WaitForSeconds(timeUntilCloseTable);
+        _sceneManager.GoToTable();
+
 
 
     }

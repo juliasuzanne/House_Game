@@ -2,18 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorBehavior : MonoBehaviour
+public class CheckDistanceToPlayer : MonoBehaviour
 {
+
 
     private bool openable = false;
     private SceneSwitch _sceneManager;
-
     public float pickup_distance;
-
     public GameObject cutscene;
-
     private UIManager _uiManager;
-
     private GameObject player;
     // Start is called before the first frame update
     void Start()
@@ -57,7 +54,7 @@ public class DoorBehavior : MonoBehaviour
     IEnumerator GoInDoor()
     {
         cutscene.SetActive(true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(11f);
         _sceneManager.GoInDoor();
 
     }
@@ -74,3 +71,5 @@ public class DoorBehavior : MonoBehaviour
         _uiManager.so.stairDoorOpen = true;
     }
 }
+
+

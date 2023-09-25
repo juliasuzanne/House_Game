@@ -104,7 +104,6 @@ public class InventoryButton : MonoBehaviour
         Debug.Log("pickup is " + can_pickup);
         // Debug.Log(_name + " " + transform.position);
 
-
     }
 
     public virtual void OnMousePressed()

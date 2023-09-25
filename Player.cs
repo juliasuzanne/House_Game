@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     //
     public float moveSpeed;
     private RaycastHit2D hit;
-    private Vector2 targetPos;
+    private Vector3 targetPos;
     SpriteRenderer sp;
     private bool moveable = true;
     private bool collided = false;
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     {
 
 
-        // mousePos.z = 0f;
+        targetPos.z = 90f;
 
         if (Input.GetMouseButtonDown(0) && moveable == true)//if mouse is clicked
         {
@@ -78,7 +78,6 @@ public class Player : MonoBehaviour
         }
         if (hit.collider.name == "flooronly" && !EventSystem.current.IsPointerOverGameObject() && moveable == true)
         {
-            Cursor.visible = false;
             float xDistance = (targetPos.x - transform.position.x);
             float yDistance = (targetPos.y - transform.position.y);
             // Debug.Log("X: " + xDistance + " Y: " + yDistance);
@@ -93,7 +92,7 @@ public class Player : MonoBehaviour
             }
             animator.SetFloat("ySpeed", (yDistance));
             animator.SetFloat("xSpeed", Mathf.Abs(xDistance));
-            transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
             if (collided == true || moveable == false)
             {
                 Cursor.visible = true;

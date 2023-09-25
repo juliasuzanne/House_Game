@@ -7,6 +7,7 @@ public class OnlyActiveIfPlayerIsClose : MonoBehaviour
     public float pickup_distance;
     private BoxCollider2D boxColliderTrigger;
     private UIManager _uiManager;
+    public bool debug;
     private GameObject player;
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,11 @@ public class OnlyActiveIfPlayerIsClose : MonoBehaviour
     {
 
         float distance = Vector3.Distance(transform.position, player.transform.position);
-        Debug.Log("distance is " + distance + " from " + transform.name);
+        if (debug == true)
+        {
+            Debug.Log("distance is " + distance + " from " + transform.name);
+
+        }
         if (distance < pickup_distance)
         {
             boxColliderTrigger.enabled = true;

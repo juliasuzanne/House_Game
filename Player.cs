@@ -43,7 +43,9 @@ public class Player : MonoBehaviour
         }
         ClickToMove();
         Debug.Log("MOVEABLE: " + moveable);
+        Debug.Log("TargetPos " + targetPos);
     }
+
 
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -76,6 +78,7 @@ public class Player : MonoBehaviour
         }
         if (hit.collider.name == "flooronly" && !EventSystem.current.IsPointerOverGameObject() && moveable == true)
         {
+            Cursor.visible = false;
             float xDistance = (targetPos.x - transform.position.x);
             float yDistance = (targetPos.y - transform.position.y);
             // Debug.Log("X: " + xDistance + " Y: " + yDistance);
@@ -93,6 +96,7 @@ public class Player : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
             if (collided == true || moveable == false)
             {
+                Cursor.visible = true;
                 animator.SetFloat("ySpeed", (0));
                 animator.SetFloat("xSpeed", Mathf.Abs(0));
                 targetPos = transform.position;
@@ -102,6 +106,8 @@ public class Player : MonoBehaviour
         }
         else
         {
+            Cursor.visible = true;
+
             Debug.Log("Hit Collider = " + hit.collider.name);
         }
 

@@ -13,6 +13,7 @@ public class DoorBehavior : MonoBehaviour
     public GameObject cutscene;
 
     private UIManager _uiManager;
+    private Transform mockPlayer;
 
     private GameObject player;
     // Start is called before the first frame update
@@ -21,6 +22,7 @@ public class DoorBehavior : MonoBehaviour
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _sceneManager = GameObject.Find("GameManager").GetComponent<SceneSwitch>();
         player = GameObject.FindGameObjectWithTag("Player");
+        mockPlayer = cutscene.transform.GetChild(0);
 
     }
 
@@ -28,7 +30,7 @@ public class DoorBehavior : MonoBehaviour
     void Update()
     {
 
-
+        mockPlayer.transform.position = Vector2.MoveTowards(mockPlayer.transform.position, new Vector3(8, 10, 0), 3 * Time.deltaTime);
     }
 
     void OnMouseDown()
@@ -56,8 +58,11 @@ public class DoorBehavior : MonoBehaviour
 
     IEnumerator GoInDoor()
     {
+        mockPlayer.transform.position = player.transform.position;
         cutscene.SetActive(true);
-        yield return new WaitForSeconds(3f);
+        player.SetActive(false);
+        mockPlayer.transform.position = Vector2.MoveTowards(mockPlayer.transform.position, new Vector3(8, 1, 0), 3 * Time.deltaTime);
+        yield return new WaitForSeconds(2f);
         _sceneManager.GoInDoor();
 
     }

@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     private bool collided = false;
     Rigidbody2D rb;
     private Animator animator;
+    private GameObject dialogue;
     // Start is called before the first frame update
 
     private void Awake()
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
+
         targetPos = transform.position;
     }
 

@@ -64,7 +64,7 @@ public class Dialog : MonoBehaviour
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        _playerText.gameObject.SetActive(true);
+        _playerText.gameObject.SetActive(false);
         _panel = this.gameObject.transform.GetChild(2).gameObject;
         _panel.SetActive(false);
         _NPCText.gameObject.SetActive(true);
@@ -111,13 +111,13 @@ public class Dialog : MonoBehaviour
     {
         _playerText.gameObject.SetActive(false);
         _NPCText.gameObject.SetActive(true);
-
     }
 
     private IEnumerator MoveThroughDialogue()
     {
-        NPCTalking();
+
         runRoutine = false;
+        NPCTalking();
         _uiManager.HideInventory();
         playerScript.MoveableFalse();
 

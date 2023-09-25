@@ -32,7 +32,6 @@ public class NPC : MonoBehaviour
         //ADD A VARIABLE HERE TO STOP FROM RESPONDING IF INVENTORY IS BEING USED
         if (clicked_Object == gameObject)
         {
-            _dialogGameObject.SetActive(true);
             clickManager.MakeNull();
             _player.MoveableFalse();
             Debug.Log("Moveable false is called in NPC script");

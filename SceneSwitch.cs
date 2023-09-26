@@ -29,7 +29,7 @@ public class SceneSwitch : MonoBehaviour
 
     public void StairScene()
     {
-        SceneManager.LoadScene(stairsSceneIndex);
+        SceneManager.LoadScene(2);
 
     }
 

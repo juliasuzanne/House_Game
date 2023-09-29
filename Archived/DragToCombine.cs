@@ -28,27 +28,27 @@ public class DragToCombine : MonoBehaviour
 
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        string thisGameobjectName;
-        string collisionGameobjectName;
+    // private void OnTriggerStay2D(Collider2D collision)
+    // {
+    //     string thisGameobjectName;
+    //     string collisionGameobjectName;
 
-        thisGameobjectName = gameObject.name.Substring(0, name.IndexOf("_"));
-        collisionGameobjectName = collision.gameObject.name.Substring(0, name.IndexOf("_"));
+    //     thisGameobjectName = gameObject.name.Substring(0, name.IndexOf("_"));
+    //     collisionGameobjectName = collision.gameObject.name.Substring(0, name.IndexOf("_"));
 
-        if (mouseButtonReleased && thisGameobjectName == "string" && thisGameobjectName == collisionGameobjectName)
-        {
-            Instantiate(Resources.Load("yarn_drag"), transform.position, Quaternion.identity);
-            mouseButtonReleased = false;
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
-        }
-        else if (mouseButtonReleased && thisGameobjectName == "leaf" && collisionGameobjectName == "yarn")
-        {
-            Instantiate(Resources.Load("string_drag"), transform.position, Quaternion.identity);
-            mouseButtonReleased = false;
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
-        }
-    }
+    //     if (mouseButtonReleased && thisGameobjectName == "string" && thisGameobjectName == collisionGameobjectName)
+    //     {
+    //         Instantiate(Resources.Load("yarn_drag"), transform.position, Quaternion.identity);
+    //         mouseButtonReleased = false;
+    //         Destroy(collision.gameObject);
+    //         Destroy(gameObject);
+    //     }
+    //     else if (mouseButtonReleased && thisGameobjectName == "leaf" && collisionGameobjectName == "yarn")
+    //     {
+    //         Instantiate(Resources.Load("string_drag"), transform.position, Quaternion.identity);
+    //         mouseButtonReleased = false;
+    //         Destroy(collision.gameObject);
+    //         Destroy(gameObject);
+    //     }
+    // }
 }

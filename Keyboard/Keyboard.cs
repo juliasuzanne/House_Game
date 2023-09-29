@@ -31,6 +31,7 @@ public class Keyboard : MonoBehaviour
 
     void PlaySound(int phenome)
     {
+
         Vector3 posToSpawn = new Vector3(xPos, yPos, 0);
         xPos = xPos + xStep;
         if (xPos > 7.9f)
@@ -51,6 +52,17 @@ public class Keyboard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            xPos = xPos + xStep;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+
+            xPos = -5.9f;
+            yPos = 3.74f;
+        }
 
         if (Input.GetKey(KeyCode.LeftShift))
         {

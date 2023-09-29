@@ -11,7 +11,7 @@ public class Phenome : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _audioSource = GetComponent<AudioSource>();
+        _audioSource = GameObject.Find("Keyboard").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

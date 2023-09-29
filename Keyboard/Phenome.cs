@@ -12,19 +12,19 @@ public class Phenome : MonoBehaviour
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
 
+
     }
 
-    void OnTriggerEnter2D
+    void OnTriggerEnter2D(Collider2D other)
     {
-        _audioSource.clip = phenomes [0];
+        _audioSource.clip = phenome;
         _audioSource.Play();
+
     }
 }

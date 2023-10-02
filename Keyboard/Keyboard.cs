@@ -10,6 +10,9 @@ public class Keyboard : MonoBehaviour
     [SerializeField]
     private GameObject[] _char;
 
+    [SerializeField]
+    private GameObject _cursor;
+
 
     [SerializeField]
     private AudioSource _audioSource;
@@ -31,18 +34,20 @@ public class Keyboard : MonoBehaviour
 
     void PlaySound(int phenome)
     {
-
         Vector3 posToSpawn = new Vector3(xPos, yPos, 0);
         xPos = xPos + xStep;
+
         if (xPos > 7.9f)
         {
             xPos = -5.9f;
+
             yPos = yPos - yStep;
 
         }
         if (yPos < -3.9f)
         {
             yPos = 3.74f;
+
         }
         _audioSource.clip = phenomes[phenome];
         _audioSource.Play();
@@ -52,9 +57,11 @@ public class Keyboard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        _cursor.transform.position = new Vector3(xPos, yPos, 3);
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            xPos = xPos + xStep;
+            PlaySound(45);
         }
 
         if (Input.GetKeyDown(KeyCode.Backspace))

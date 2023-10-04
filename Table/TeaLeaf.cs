@@ -16,6 +16,8 @@ public class TeaLeaf : MonoBehaviour
 
     [SerializeField]
     private GameObject _teaLeaves;
+    [SerializeField]
+    private GameObject _teaLeaves2;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,10 +44,16 @@ public class TeaLeaf : MonoBehaviour
         while (_numTeaLeaves2 < 30)
         {
 
-            GameObject newEnemy = Instantiate(_teaLeaves, (Random.insideUnitCircle * 1), Quaternion.Euler(0, Random.Range(0f, 40f), Random.Range(0f, 360f)));
+            GameObject newEnemy = Instantiate(_teaLeaves2, (Random.insideUnitCircle * 1), Quaternion.Euler(0, Random.Range(0f, 40f), Random.Range(0f, 360f)));
             newEnemy.transform.parent = _leafContainer2.transform;
             _numTeaLeaves2 = _numTeaLeaves2 + 1;
+            if (_numTeaLeaves2 == 30)
+            {
+                _leafContainer2.transform.position = new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0);
+            }
         }
+
+
 
     }
 

@@ -23,6 +23,8 @@ public class Keyboard : MonoBehaviour
     private float xStep = 2f;
     [SerializeField]
     private float yStep = 2f;
+
+    private bool _typing = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,26 +34,48 @@ public class Keyboard : MonoBehaviour
 
     }
 
+    public void ToggleType()
+    {
+        if (_typing == false)
+        {
+            _typing = true;
+        }
+        else
+        {
+            _typing = false;
+        }
+    }
+
+
+
     void PlaySound(int phenome)
     {
-        Vector3 posToSpawn = new Vector3(xPos, yPos, 0);
-        xPos = xPos + xStep;
-
-        if (xPos > 7.9f)
+        if (_typing == true)
         {
-            xPos = -5.9f;
+            Vector3 posToSpawn = new Vector3(xPos, yPos, 0);
+            xPos = xPos + xStep;
 
-            yPos = yPos - yStep;
+            if (xPos > 7.9f)
+            {
+                xPos = -5.9f;
 
+                yPos = yPos - yStep;
+
+            }
+            if (yPos < -3.9f)
+            {
+                yPos = 3.74f;
+
+            }
+            _audioSource.clip = phenomes[phenome];
+            _audioSource.Play();
+            GameObject newChar = Instantiate(_char[phenome], posToSpawn, Quaternion.identity);
         }
-        if (yPos < -3.9f)
+        else
         {
-            yPos = 3.74f;
-
+            _audioSource.clip = phenomes[phenome];
+            _audioSource.Play();
         }
-        _audioSource.clip = phenomes[phenome];
-        _audioSource.Play();
-        GameObject newChar = Instantiate(_char[phenome], posToSpawn, Quaternion.identity);
     }
 
     // Update is called once per frame

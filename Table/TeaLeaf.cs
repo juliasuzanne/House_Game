@@ -24,9 +24,9 @@ public class TeaLeaf : MonoBehaviour
     private GameObject _leafContainer;
 
     [SerializeField]
-    private GameObject _teaLeaves;
-    [SerializeField]
-    private GameObject _teaLeaves2;
+    private GameObject[] _teaLeaves;
+
+
     // Start is called before the first frame update
 
     void Start()
@@ -72,14 +72,14 @@ public class TeaLeaf : MonoBehaviour
         while (_numTeaLeaves < _startNumTeaLeaves)
         {
 
-            GameObject newEnemy = Instantiate(_teaLeaves, (Random.insideUnitCircle * 3), Quaternion.Euler(0, Random.Range(0f, 140f), Random.Range(0f, 360f)));
+            GameObject newEnemy = Instantiate(_teaLeaves[Random.Range(0, 2)], (Random.insideUnitCircle * 3), Quaternion.Euler(0, Random.Range(0f, 140f), Random.Range(0f, 360f)));
             newEnemy.transform.parent = _leafContainer.transform;
             _numTeaLeaves = _numTeaLeaves + 1;
         }
         while (_numTeaLeaves3 < _startNumTeaLeaves3)
         {
 
-            GameObject newEnemy = Instantiate(_teaLeaves, (Random.insideUnitCircle * Random.Range(0f, 2.3f)), Quaternion.Euler(0, Random.Range(0f, 140f), Random.Range(0f, 360f)));
+            GameObject newEnemy = Instantiate(_teaLeaves[Random.Range(0, 2)], (Random.insideUnitCircle * Random.Range(0f, 2.3f)), Quaternion.Euler(0, Random.Range(0f, 140f), Random.Range(0f, 360f)));
             newEnemy.transform.parent = _leafContainer3.transform;
             _numTeaLeaves3 = _numTeaLeaves3 + 1;
             if (_numTeaLeaves3 == _startNumTeaLeaves3)
@@ -91,7 +91,7 @@ public class TeaLeaf : MonoBehaviour
         while (_numTeaLeaves2 < _startNumTeaLeaves2)
         {
 
-            GameObject newEnemy = Instantiate(_teaLeaves2, (Random.insideUnitCircle * 1), Quaternion.Euler(0, Random.Range(0f, 40f), Random.Range(0f, 360f)));
+            GameObject newEnemy = Instantiate(_teaLeaves[Random.Range(0, 2)], (Random.insideUnitCircle * 1), Quaternion.Euler(0, Random.Range(0f, 40f), Random.Range(0f, 360f)));
             newEnemy.transform.parent = _leafContainer2.transform;
             _numTeaLeaves2 = _numTeaLeaves2 + 1;
             if (_numTeaLeaves2 == _startNumTeaLeaves2)

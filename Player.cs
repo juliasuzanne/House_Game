@@ -10,10 +10,11 @@ public class Player : MonoBehaviour
     //variable for amount of diamonds
     //
     public float moveSpeed;
+    float xInput, yInput, zInput;
     private RaycastHit2D hit;
     private Vector3 targetPos;
     SpriteRenderer sp;
-    private bool moveable = true;
+    private bool moveable = false;
     private bool collided = false;
     Rigidbody2D rb;
     private Animator animator;
@@ -37,15 +38,31 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("MOveable is " + moveable);
+        xInput = Input.GetAxis("Horizontal");
+        yInput = Input.GetAxis("Vertical");
+
 
 
         targetPos.z = 90f;
 
-        if (Input.GetMouseButtonDown(0) && moveable == true)//if mouse is clicked
+        // if (Input.GetMouseButtonDown(0) && moveable == true)//if mouse is clicked
+        // {
+        //     targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // }
+        // ClickToMove();
+
+
+        if (moveable == true)
         {
-            targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.Translate(xInput * moveSpeed, yInput * moveSpeed, 0);
+            PlatformerMove();
+            FlipPlayer();
+            animator.SetFloat("ySpeed", (moveSpeed * yInput));
+            animator.SetFloat("xSpeed", Mathf.Abs(moveSpeed * xInput));
         }
-        ClickToMove();
+
+
         Debug.Log("MOVEABLE: " + moveable);
         Debug.Log("TargetPos " + targetPos);
     }
@@ -117,6 +134,38 @@ public class Player : MonoBehaviour
 
     }
 
+
+
+
+
+
+
+    void PlatformerMove()
+    {
+        if (moveable == true)
+        { rb.velocity = new Vector2(moveSpeed * xInput, rb.velocity.y); }
+        //keeping y velocity the same, but modifying
+        else
+        {
+            Cursor.visible = true;
+
+            Debug.Log("Hit Collider = " + hit.collider.name);
+        }
+
+    }
+
+    void FlipPlayer()
+    {
+        if (rb.velocity.x < -0.0001f)
+        {
+            sp.flipX = false;
+
+        }
+        else if (rb.velocity.x > 0.0001f)
+        {
+            sp.flipX = true;
+        }
+    }
 
 }
 

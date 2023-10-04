@@ -33,7 +33,7 @@ public class TeaLeaf : MonoBehaviour
     {
         _startNumTeaLeaves = Random.Range(10, 200);
         _startNumTeaLeaves2 = Random.Range(10, 60);
-        _startNumTeaLeaves3 = Random.Range(100, 300);
+        _startNumTeaLeaves3 = Random.Range(100, 200);
     }
 
     // Update is called once per frame
@@ -62,7 +62,7 @@ public class TeaLeaf : MonoBehaviour
         _numTeaLeaves3 = 0;
         _startNumTeaLeaves = Random.Range(10, 200);
         _startNumTeaLeaves2 = Random.Range(10, 60);
-        _startNumTeaLeaves3 = Random.Range(100, 300);
+        _startNumTeaLeaves3 = Random.Range(100, 200);
         startSpawn();
 
     }

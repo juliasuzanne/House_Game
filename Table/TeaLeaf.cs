@@ -7,12 +7,14 @@ public class TeaLeaf : MonoBehaviour
 
     private int _numTeaLeaves = 0;
     private int _numTeaLeaves2 = 0;
+    private int _numTeaLeaves3 = 0;
+    [SerializeField]
+    private GameObject _leafContainer3;
 
     [SerializeField]
     private GameObject _leafContainer2;
     [SerializeField]
     private GameObject _leafContainer;
-    private bool _stopSpawning = false;
 
     [SerializeField]
     private GameObject _teaLeaves;
@@ -33,56 +35,43 @@ public class TeaLeaf : MonoBehaviour
     public void startSpawn()
     {
 
-        while (_numTeaLeaves < 10)
+        while (_numTeaLeaves < 90)
         {
 
-            GameObject newEnemy = Instantiate(_teaLeaves, (Random.insideUnitCircle * 3), Quaternion.Euler(0, Random.Range(0f, 40f), Random.Range(0f, 360f)));
+            GameObject newEnemy = Instantiate(_teaLeaves, (Random.insideUnitCircle * 3), Quaternion.Euler(0, Random.Range(0f, 140f), Random.Range(0f, 360f)));
             newEnemy.transform.parent = _leafContainer.transform;
             _numTeaLeaves = _numTeaLeaves + 1;
         }
+        while (_numTeaLeaves3 < 220)
+        {
 
-        while (_numTeaLeaves2 < 30)
+            GameObject newEnemy = Instantiate(_teaLeaves, (Random.insideUnitCircle * Random.Range(0f, 2.3f)), Quaternion.Euler(0, Random.Range(0f, 140f), Random.Range(0f, 360f)));
+            newEnemy.transform.parent = _leafContainer3.transform;
+            _numTeaLeaves3 = _numTeaLeaves3 + 1;
+            if (_numTeaLeaves3 == 220)
+            {
+                _leafContainer3.transform.position = new Vector3(Random.Range(-1f, 1.5f), Random.Range(-1.5f, 1f), 0);
+            }
+        }
+
+        while (_numTeaLeaves2 < 50)
         {
 
             GameObject newEnemy = Instantiate(_teaLeaves2, (Random.insideUnitCircle * 1), Quaternion.Euler(0, Random.Range(0f, 40f), Random.Range(0f, 360f)));
             newEnemy.transform.parent = _leafContainer2.transform;
             _numTeaLeaves2 = _numTeaLeaves2 + 1;
-            if (_numTeaLeaves2 == 30)
+            if (_numTeaLeaves2 == 50)
             {
                 _leafContainer2.transform.position = new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0);
             }
+
         }
 
 
 
-    }
-
-    //spawn game objects every 5 seconds
-    //create a coroutine of type IEnumerator -- Yield Events
-    //while loop
-
-    IEnumerator SpawnRoutine()
-    {
-        yield return new WaitForSeconds(3f);
-        while (_stopSpawning == false)
-        {
-            Vector3 posToSpawn = new Vector3(Random.Range(-7f, 7f), -3, 0);
-            GameObject newEnemy = Instantiate(_teaLeaves, posToSpawn, Quaternion.identity);
-            newEnemy.transform.parent = _leafContainer.transform;
-            //parent is a type transform, not a gameObject (enemyContainer is a gameObject)
-            yield return new WaitForSeconds(.1f);
-        }
-        // always use infinite loops because we can use yield events
-        // instantiate referenced object, enemy prefab
-        // yield, wait for 5 seconds
 
     }
 
-
-    public void OnPlayerDeath()
-    {
-        _stopSpawning = true;
-    }
 
 
 }

@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private RaycastHit2D hit;
     private Vector3 targetPos;
     SpriteRenderer sp;
+    NavMeshAgent agent;
     private bool moveable = false;
     private bool collided = false;
     Rigidbody2D rb;
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         animator = transform.GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
     }
     void Start()
     {
@@ -114,6 +116,8 @@ public class Player : MonoBehaviour
             }
             animator.SetFloat("ySpeed", (yDistance));
             animator.SetFloat("xSpeed", Mathf.Abs(xDistance));
+
+            // agent.SetDestination(new Vector3(targetPos.x, targetPos.y, 85.84f));
             transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * 1000 * Time.deltaTime);
             if (collided == true || moveable == false)
             {

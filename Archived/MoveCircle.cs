@@ -36,6 +36,6 @@ public class MoveCircle : MonoBehaviour
     void SetAgentPosition()
     {
         Debug.Log("target = " + target);
-        agent.SetDestination(new Vector2(target.x, target.y));
+        agent.SetDestination(new Vector3(target.x, target.y, transform.position.z));
     }
 }

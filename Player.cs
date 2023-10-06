@@ -28,46 +28,36 @@ public class Player : MonoBehaviour
         sp = GetComponent<SpriteRenderer>();
         animator = transform.GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
     void Start()
     {
-
         targetPos = transform.position;
         targetPos.z = 90f;
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("MOveable is " + moveable);
         xInput = Input.GetAxis("Horizontal");
         yInput = Input.GetAxis("Vertical");
-
-
-
         targetPos.z = 90f;
-
-
-        // if (Input.GetMouseButtonDown(0) && moveable == true)//if mouse is clicked
-        // {
-        //     targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // }
-        // ClickToMove();
-
-
-        if (moveable == true)
+        if (Input.GetMouseButtonDown(0) && moveable == true)//if mouse is clicked
         {
-            transform.Translate(xInput * moveSpeed, yInput * moveSpeed, 0);
-            PlatformerMove();
-            FlipPlayer();
-            animator.SetFloat("ySpeed", (moveSpeed * yInput));
-            animator.SetFloat("xSpeed", Mathf.Abs(moveSpeed * xInput));
+            targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
-
-
-        Debug.Log("MOVEABLE: " + moveable);
-        Debug.Log("TargetPos " + targetPos);
+        ClickToMove();
+        // if (moveable == true)
+        // {
+        //     transform.Translate(xInput * moveSpeed, yInput * moveSpeed, 0);
+        //     PlatformerMove();
+        //     FlipPlayer();
+        //     animator.SetFloat("ySpeed", (moveSpeed * yInput));
+        //     animator.SetFloat("xSpeed", Mathf.Abs(moveSpeed * xInput));
+        // }
+        // Debug.Log("MOVEABLE: " + moveable);
+        // Debug.Log("TargetPos " + targetPos);
     }
 
 
@@ -95,12 +85,12 @@ public class Player : MonoBehaviour
 
     void ClickToMove()
     {
+        // if (moveable == true)
+        // {
+        //     hit = Physics2D.Raycast(targetPos, Vector2.zero);
+        // }
+        // hit.collider.name == "flooronly" && !EventSystem.current.IsPointerOverGameObject() &&
         if (moveable == true)
-        {
-            hit = Physics2D.Raycast(targetPos, Vector2.zero);
-
-        }
-        if (hit.collider.name == "flooronly" && !EventSystem.current.IsPointerOverGameObject() && moveable == true)
         {
             float xDistance = (targetPos.x - transform.position.x);
             float yDistance = (targetPos.y - transform.position.y);
@@ -117,8 +107,8 @@ public class Player : MonoBehaviour
             animator.SetFloat("ySpeed", (yDistance));
             animator.SetFloat("xSpeed", Mathf.Abs(xDistance));
 
-            // agent.SetDestination(new Vector3(targetPos.x, targetPos.y, 85.84f));
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * 1000 * Time.deltaTime);
+            agent.SetDestination(new Vector3(targetPos.x, targetPos.y, transform.position.z));
+            // transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * 1000 * Time.deltaTime);
             if (collided == true || moveable == false)
             {
                 Cursor.visible = true;

@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
 
         targetPos.z = 90f;
 
+
         // if (Input.GetMouseButtonDown(0) && moveable == true)//if mouse is clicked
         // {
         //     targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -113,7 +114,7 @@ public class Player : MonoBehaviour
             }
             animator.SetFloat("ySpeed", (yDistance));
             animator.SetFloat("xSpeed", Mathf.Abs(xDistance));
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * 1000 * Time.deltaTime);
             if (collided == true || moveable == false)
             {
                 Cursor.visible = true;

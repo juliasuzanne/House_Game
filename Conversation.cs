@@ -219,7 +219,6 @@ public class Conversation : MonoBehaviour
                 yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
                 NPCTalking();
                 _NPCText.text = NPCText_string[4];
-
                 yield return new WaitForSeconds(2.0f);
                 EndConversation();
                 yield break;

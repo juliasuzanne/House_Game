@@ -128,6 +128,8 @@ public class UIManager : MonoBehaviour
     //     _item.color = new Color(255, 255, 255, 1f);
     // }
 
+
+
     public void MakeInventoryUIShadow(int child)
     {
         _inventoryUI.transform.GetChild(child).gameObject.SetActive(false);
@@ -164,6 +166,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ChangeUserName(string _name)
+    {
+        so.playerName = _name;
+    }
 
 
     public void LoadGame()

@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
+    private UIManager _uiManager;
     // Start is called before the first frame update
     void Start()
     {
+        _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        _uiManager.enabled = true;
         Time.timeScale = 1;
 
     }
@@ -15,14 +17,16 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void ResumeGame(){
+    public void ResumeGame()
+    {
         Time.timeScale = 1;
     }
 
-    public void PauseGame(){
+    public void PauseGame()
+    {
         Time.timeScale = 0;
     }
 

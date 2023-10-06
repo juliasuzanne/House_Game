@@ -29,6 +29,7 @@ public class SceneSwitch : MonoBehaviour
 
     public void StairScene()
     {
+        _uiManager.SaveGame();
         SceneManager.LoadScene(2);
 
     }
@@ -47,6 +48,7 @@ public class SceneSwitch : MonoBehaviour
 
     public void ExitNightmare()
     {
+
         // _uiManager.SaveGame();
         // Debug.Log("Saved Game");
         // _uiManager.LoadGame();
@@ -58,12 +60,14 @@ public class SceneSwitch : MonoBehaviour
 
     public void ExitTable()
     {
+        _uiManager.SaveGame();
         SceneManager.LoadScene(6);
 
     }
 
     public void GoToTable()
     {
+        _uiManager.SaveGame();
         SceneManager.LoadScene(5);
     }
 

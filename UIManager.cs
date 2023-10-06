@@ -54,7 +54,6 @@ public class UIManager : MonoBehaviour
         }
 
         so.playerLevel = SceneManager.GetActiveScene().buildIndex;
-        so.playerName = "Julia";
 
         if (so.playerLevel == 2)
         {
@@ -171,10 +170,16 @@ public class UIManager : MonoBehaviour
         so.playerName = _name;
     }
 
+    private void Awake()
+    {
+        LoadGame();
+    }
 
     public void LoadGame()
     {
+        Debug.Log("Loaded game");
         so = SaveManager.Load();
+        Debug.Log(so.playerName);
 
         if (so.rock == true)
         {

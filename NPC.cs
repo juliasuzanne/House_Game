@@ -10,7 +10,8 @@ public class NPC : MonoBehaviour
     public ClickManager clickManager;
     private Player _player;
 
-    private Dialog _dialog;
+    [SerializeField]
+    private Conversation _dialog;
 
 
 
@@ -18,7 +19,7 @@ public class NPC : MonoBehaviour
     void Start()
     {
         _dialogGameObject = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).gameObject;
-        _dialog = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).GetComponent<Dialog>();
+        _dialog = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).GetComponent<Conversation>();
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
         // Debug.Log("Get Dialog: " + _dialog);

@@ -40,6 +40,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float ScaleValue = 0.6f - (gameObject.transform.position.y / 100);
+
+        gameObject.transform.localScale = new Vector3(ScaleValue, ScaleValue, ScaleValue);
+
         xInput = Input.GetAxis("Horizontal");
         yInput = Input.GetAxis("Vertical");
         targetPos.z = 90f;

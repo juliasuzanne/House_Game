@@ -9,6 +9,10 @@ public class Player : MonoBehaviour
 
     //variable for amount of diamonds
     //
+    [SerializeField]
+    private float startingScale;
+    [SerializeField]
+    private float scaleAmount;
     public float moveSpeed;
     float xInput, yInput, zInput;
     private RaycastHit2D hit;
@@ -40,7 +44,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float ScaleValue = 0.6f - (gameObject.transform.position.y / 100);
+        float ScaleValue = startingScale - (gameObject.transform.position.y / scaleAmount);
 
         gameObject.transform.localScale = new Vector3(ScaleValue, ScaleValue, ScaleValue);
 

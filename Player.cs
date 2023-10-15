@@ -44,6 +44,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("PLAYER POS X, Y: (" + transform.position.x + ", " + transform.position.y + ")");
+        Debug.Log("TARGET POS: (" + targetPos.x + ", " + targetPos.y + ")");
+
+
         float ScaleValue = startingScale - (gameObject.transform.position.y / scaleAmount);
 
         gameObject.transform.localScale = new Vector3(ScaleValue, ScaleValue, ScaleValue);
@@ -102,6 +106,7 @@ public class Player : MonoBehaviour
         {
             float xDistance = (targetPos.x - transform.position.x);
             float yDistance = (targetPos.y - transform.position.y);
+
             // Debug.Log("X: " + xDistance + " Y: " + yDistance);
             if (xDistance < 0)
             {
@@ -110,21 +115,24 @@ public class Player : MonoBehaviour
             else
             {
                 sp.flipX = true;
-
             }
-            animator.SetFloat("ySpeed", (yDistance));
+
+
+
+            animator.SetFloat("ySpeed", Mathf.Abs(yDistance));
             animator.SetFloat("xSpeed", Mathf.Abs(xDistance));
 
             agent.SetDestination(new Vector3(targetPos.x, targetPos.y, transform.position.z));
-            // transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * 1000 * Time.deltaTime);
-            if (collided == true || moveable == false)
-            {
-                Cursor.visible = true;
-                animator.SetFloat("ySpeed", (0));
-                animator.SetFloat("xSpeed", Mathf.Abs(0));
-                targetPos = transform.position;
 
-            }
+            // transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * 1000 * Time.deltaTime);
+            // if (collided == true || moveable == false)
+            // {
+            //     Cursor.visible = true;
+            //     animator.SetFloat("ySpeed", (0));
+            //     animator.SetFloat("xSpeed", (0));
+            //     targetPos = transform.position;
+
+            // }
 
         }
         else

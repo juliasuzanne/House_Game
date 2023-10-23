@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 
     //variable for amount of diamonds
     //
+
     [SerializeField]
     private float startingScale;
     [SerializeField]
@@ -19,7 +20,7 @@ public class Player : MonoBehaviour
     private Vector3 targetPos;
     SpriteRenderer sp;
     NavMeshAgent agent;
-    private bool moveable = false;
+    private bool moveable = true;
     private bool collided = false;
     Rigidbody2D rb;
     private Animator animator;

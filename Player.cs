@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
 
 
 
-        if (moveable == true)
+        if (moveable == true && !EventSystem.current.IsPointerOverGameObject())
         {
             hit = Physics2D.Raycast(targetPos, Vector2.zero);
             Debug.Log("hit: " + hit.collider.name);

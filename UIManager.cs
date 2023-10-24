@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
 
     private Image _item;
 
+
     GameManager _gameManager;
 
     private GameObject player;

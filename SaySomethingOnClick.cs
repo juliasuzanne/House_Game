@@ -8,7 +8,6 @@ public class SaySomethingOnClick : MonoBehaviour
     private UIManager _uiManager;
     private Transform player;
     private Player playerScript;
-    [SerializeField]
     private Text _playerText;
     [SerializeField]
     private string PlayerText;

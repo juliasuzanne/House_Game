@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     private float startingScale;
     [SerializeField]
     private float scaleAmount;
+    [SerializeField]
+    private GameObject floor;
     public float moveSpeed;
     float xInput, yInput, zInput;
     private RaycastHit2D hit;
@@ -58,6 +60,7 @@ public class Player : MonoBehaviour
         targetPos.z = 90f;
         if (Input.GetMouseButtonDown(0) && moveable == true)//if mouse is clicked
         {
+
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
         ClickToMove();
@@ -98,17 +101,16 @@ public class Player : MonoBehaviour
 
     void ClickToMove()
     {
-        // if (moveable == true)
-        // {
-        //     hit = Physics2D.Raycast(targetPos, Vector2.zero);
-        // }
-        // hit.collider.name == "flooronly" && !EventSystem.current.IsPointerOverGameObject() &&
+
+
+
         if (moveable == true)
         {
+            hit = Physics2D.Raycast(targetPos, Vector2.zero);
+            Debug.Log("hit: " + hit.collider.name);
+
             float xDistance = (targetPos.x - transform.position.x);
             float yDistance = (targetPos.y - transform.position.y);
-
-            // Debug.Log("X: " + xDistance + " Y: " + yDistance);
             if (xDistance < 0)
             {
                 sp.flipX = false;
@@ -117,14 +119,20 @@ public class Player : MonoBehaviour
             {
                 sp.flipX = true;
             }
-
-
-
             animator.SetFloat("ySpeed", Mathf.Abs(yDistance));
             animator.SetFloat("ySpeedDir", yDistance);
             animator.SetFloat("xSpeed", Mathf.Abs(xDistance));
-
             agent.SetDestination(new Vector3(targetPos.x, targetPos.y, transform.position.z));
+            // Debug.Log("X: " + xDistance + " Y: " + yDistance);
+
+
+
+            // && !EventSystem.current.IsPointerOverGameObject()
+
+            if (hit.collider.name != "Floor")
+            {
+                targetPos = transform.position;
+            }
 
             // transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * 1000 * Time.deltaTime);
             // if (collided == true || moveable == false)

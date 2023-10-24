@@ -38,8 +38,7 @@ public class SaySomethingOnClick : MonoBehaviour
 
     void OnMouseDown()
     {
-        _gameManager.PauseGame();
-        playerScript.MoveableFalse();
+
         _playerText.gameObject.SetActive(true);
         _playerText.text = PlayerText;
         StartCoroutine("WaitForClick");
@@ -49,7 +48,7 @@ public class SaySomethingOnClick : MonoBehaviour
 
     private IEnumerator WaitForClick()
     {
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        yield return new WaitForSeconds(2f);
         _playerText.gameObject.SetActive(false);
 
 

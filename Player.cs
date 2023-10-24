@@ -121,6 +121,7 @@ public class Player : MonoBehaviour
 
 
             animator.SetFloat("ySpeed", Mathf.Abs(yDistance));
+            animator.SetFloat("ySpeedDir", yDistance);
             animator.SetFloat("xSpeed", Mathf.Abs(xDistance));
 
             agent.SetDestination(new Vector3(targetPos.x, targetPos.y, transform.position.z));

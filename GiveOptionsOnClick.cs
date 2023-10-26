@@ -12,14 +12,7 @@ public class GiveOptionsOnClick : MonoBehaviour
     private Transform player;
     [SerializeField]
     private Text _playerText;
-    [SerializeField]
-    private Text _NPCText;
     private bool collided = false;
-    private int _case;
-    private int _choice;
-
-
-
 
     [SerializeField]
     private GameObject _panel;
@@ -63,64 +56,28 @@ public class GiveOptionsOnClick : MonoBehaviour
     public void GiveOptions()
     {
 
-        if (runRoutine == true)
-        {
-            StartCoroutine("MoveThroughDialogue");
-        }
-
-    }
-    private IEnumerator MoveThroughDialogue()
-    {
-
-        runRoutine = false;
         _uiManager.HideInventory();
         playerScript.MoveableFalse();
-
-        //CLICK TO REVEAL PANEL
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         _panel.SetActive(true);
-        var waitForButton = new WaitForUIButtons(AButton, BButton);
-        yield return waitForButton.Reset();
-        // A 0 BUTTON PRESSED
-        if (waitForButton.PressedButton == AButton)
-        {
-            // StartCoroutine("TalkThenPanel(0, 1, 1)");
-
-            _panel.SetActive(false);
-            _playerText.gameObject.SetActive(true);
-            _playerText.text = "FIRST";
-            Debug.Log("FIRST BUTTON PRESSED");
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-            _playerText.gameObject.SetActive(false);
-            runRoutine = true;
-            _panel.SetActive(false);
-            playerScript.MoveableTrue();
-            yield break;
-
-        }
-
-        else
-        {
-            _panel.SetActive(false);
-            _playerText.gameObject.SetActive(true);
-            _playerText.text = "SECOND";
-            Debug.Log("SECOND BUTTON PRESSED");
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-            _playerText.gameObject.SetActive(false);
-            runRoutine = true;
-            _panel.SetActive(false);
-            playerScript.MoveableTrue();
-            yield break;
-
-
-
-        }
-
-
-
-
 
     }
+
+    public void OptionA()
+    {
+        Debug.Log("A PRESSED");
+        _uiManager.HideInventory();
+        playerScript.MoveableTrue();
+        _panel.SetActive(false);
+    }
+
+    public void OptionB()
+    {
+        Debug.Log("B PRESSED");
+        _uiManager.HideInventory();
+        playerScript.MoveableTrue();
+        _panel.SetActive(false);
+    }
+
 
 }
 

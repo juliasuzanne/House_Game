@@ -38,6 +38,7 @@ public class ModalBehavior : MonoBehaviour
         _gameManager.PauseGame();
         _modal.gameObject.SetActive(true);
         _player.MoveableFalse();
+        Debug.Log("Mouse Down on " + _modal.gameObject.name);
     }
 
     void OnMouseUp()
@@ -50,7 +51,7 @@ public class ModalBehavior : MonoBehaviour
         Cursor.SetCursor(null, Vector2.zero, cursorMode);
 
     }
-    public void ExitModal()
+    public void ExitDeskModal()
     {
         _modal.gameObject.SetActive(false);
         _gameManager.ResumeGame();

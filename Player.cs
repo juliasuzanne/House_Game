@@ -47,8 +47,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("PLAYER POS X, Y: (" + transform.position.x + ", " + transform.position.y + ")");
-        Debug.Log("TARGET POS: (" + targetPos.x + ", " + targetPos.y + ")");
+        // Debug.Log("PLAYER POS X, Y: (" + transform.position.x + ", " + transform.position.y + ")");
+        // Debug.Log("TARGET POS: (" + targetPos.x + ", " + targetPos.y + ")");
 
 
         float ScaleValue = startingScale - (gameObject.transform.position.y / scaleAmount);

@@ -51,7 +51,7 @@ public class ModalBehavior : MonoBehaviour
         Cursor.SetCursor(null, Vector2.zero, cursorMode);
 
     }
-    public void ExitDeskModal()
+    public void ExitModal()
     {
         _modal.gameObject.SetActive(false);
         _gameManager.ResumeGame();

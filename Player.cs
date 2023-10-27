@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
 
     //variable for amount of diamonds
     //
-
+    [SerializeField]
+    private bool flipping = true;
     [SerializeField]
     private float startingScale;
     [SerializeField]
@@ -111,18 +112,23 @@ public class Player : MonoBehaviour
 
             float xDistance = (targetPos.x - transform.position.x);
             float yDistance = (targetPos.y - transform.position.y);
-            if (xDistance < 0)
+            if (flipping == true)
             {
-                sp.flipX = false;
-            }
-            else
-            {
-                sp.flipX = true;
+                if (xDistance < 0)
+                {
+                    sp.flipX = false;
+                }
+                else
+                {
+                    sp.flipX = true;
+                }
             }
             animator.SetFloat("ySpeed", Mathf.Abs(yDistance));
             animator.SetFloat("ySpeedDir", yDistance);
             animator.SetFloat("xSpeed", Mathf.Abs(xDistance));
             agent.SetDestination(new Vector3(targetPos.x, targetPos.y, transform.position.z));
+
+
             // Debug.Log("X: " + xDistance + " Y: " + yDistance);
 
 

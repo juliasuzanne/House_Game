@@ -20,7 +20,7 @@ public class Drawing : MonoBehaviour
     void Start()
     {
 
-        sp = transform.GetComponent<SpriteRenderer>();
+        sp = transform.GetChild(0).GetComponent<SpriteRenderer>();
         _sceneManager = GameObject.Find("GameManager").GetComponent<SceneSwitch>();
         Debug.Log(sprites.Length);
 
@@ -29,12 +29,10 @@ public class Drawing : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (drawingComplete == false)
+        if (paperTouchCount < sprites.Length)
         {
-            // for (int i = 0; i < sprites.Length; i++)
-            // {
-            //     // Code to be repeated.
-            // }
+            paperTouchCount = paperTouchCount + 1;
+            sp.sprite = sprites[paperTouchCount];
 
         }
 

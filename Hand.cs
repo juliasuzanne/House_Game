@@ -5,9 +5,15 @@ using UnityEngine;
 public class Hand : MonoBehaviour
 {
     [SerializeField]
+    private float h_speed = 1;
+    [SerializeField]
+    private int _jumpForce = 5;
+    [SerializeField]
     private float _moveSpeed = 2f;
     private bool falling = false;
     private bool moveable = false;
+    private bool _grounded = false;
+
     Rigidbody2D rb;
     SpriteRenderer sp;
     private Animator animator;
@@ -47,14 +53,31 @@ public class Hand : MonoBehaviour
 
     void PlatformerMove()
     {
+
+
+
         if (moveable == true)
         {
-            rb.velocity = new Vector2(_moveSpeed * xInput, yInput);
+            if (Input.GetKeyDown(KeyCode.Space) && _grounded == true)
+            {
+                yInput = _jumpForce;
+
+                Debug.Log("space key down");
+
+            }
+            else
+            {
+                yInput = -1.2f;
+                // yInput = Input.GetAxis("Vertical");
+
+            }
             animator.SetFloat("ySpeed", yInput);
             animator.SetFloat("xSpeed", Mathf.Abs(xInput));
 
-        }
+            rb.velocity = new Vector2(_moveSpeed * xInput, yInput);
 
+
+        }
         //keeping y velocity the same, but modifying
         else
         {
@@ -69,44 +92,77 @@ public class Hand : MonoBehaviour
 
     }
 
-    public void ChangeFallingBool()
+    // public void ChangeFallingBool()
+    // {
+    //     if (falling == true)
+    //     {
+    //         falling = false;
+    //     }
+    //     else
+    //     {
+    //         falling = true;
+    //         moveable = true;
+
+    //     }
+    // }
+
+    void CheckGrounded()
     {
-        if (falling == true)
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 1.0f, 1 << 12);
+        Debug.DrawRay(transform.position, -Vector2.up, Color.green);
+
+        if (hit.collider != null)
         {
-            falling = false;
+
+            _grounded = true;
         }
         else
         {
-            falling = true;
+            _grounded = false;
+        }
+    }
+
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.transform.name == "Broom")
+        {
             moveable = true;
 
         }
     }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        // Debug.Log(other.name);
-        // if (other.name == "Broom")
-        // {
-        //     ChangeFallingBool();
 
-        // }
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.transform.name == "Broom")
+        {
+        }
     }
 
+
+    // public void Jump(bool jump)
+    // {
+    //     animator.SetBool("Jump", !jump);
+    // }
 
 
     // Update is called once per frame
     void Update()
     {
         xInput = Input.GetAxis("Horizontal");
-        yInput = Input.GetAxis("Vertical");
+
         FlipPlayer();
         PlatformerMove();
-        Debug.Log("Falling = " + falling);
+        CheckGrounded();
+        Debug.Log("Grounded = " + _grounded);
 
-        if (falling == true)
-        {
-            transform.Translate(Vector3.down * _moveSpeed * Time.deltaTime);
-        }
+        // if (falling == true)
+        // {
+        //     transform.Translate(Vector3.down * _moveSpeed * Time.deltaTime);
+        // }
+
+
+
 
     }
 }

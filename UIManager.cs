@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
 
     private GameObject player;
     private Player _playerScript;
+    private PickColor _pickColor;
     private GameObject _pickups;
 
     private Inventory inventory;
@@ -38,6 +39,8 @@ public class UIManager : MonoBehaviour
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         player = GameObject.FindGameObjectWithTag("Player");
         _playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+        _pickColor = GameObject.FindGameObjectWithTag("Player").GetComponent<PickColor>();
 
         _pickups = GameObject.FindGameObjectWithTag("Pickups");
         _panel.gameObject.SetActive(false);
@@ -68,14 +71,11 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.P))
         {
             _panel.SetActive(true);
             _gameManager.PauseGame();
         }
-
-
     }
 
     public void ResumeGame()
@@ -171,6 +171,14 @@ public class UIManager : MonoBehaviour
         so.playerName = _name;
     }
 
+    public void SaveColor(float Red, float Green, float Blue)
+    {
+        so.red = Red;
+        so.green = Green;
+        so.blue = Blue;
+
+    }
+
     private void Awake()
     {
         LoadGame();
@@ -225,13 +233,10 @@ public class UIManager : MonoBehaviour
             {
                 doorBehavior.OpenDoor();
             }
-
         }
 
+        _pickColor.SetColor(so.red, so.green, so.blue);
 
-
-        // UpdateLives(so.playerLives);
-        // _score = so.playerPoints;
 
 
     }

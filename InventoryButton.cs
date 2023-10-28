@@ -84,7 +84,7 @@ public class InventoryButton : MonoBehaviour
         if (moving == true)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = Camera.main.transform.position.z + Camera.main.nearClipPlane;
+            mousePosition.z = 99f;
             transform.position = mousePosition;
             if (transform.position == startingPoint)
             {

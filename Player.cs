@@ -102,9 +102,6 @@ public class Player : MonoBehaviour
 
     void ClickToMove()
     {
-
-
-
         if (moveable == true && !EventSystem.current.IsPointerOverGameObject())
         {
             hit = Physics2D.Raycast(targetPos, Vector2.zero);

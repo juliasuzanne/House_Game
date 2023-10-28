@@ -23,11 +23,13 @@ public class PickColor : MonoBehaviour
     [SerializeField]
     private Slider greenSlider;
     private UIManager _uiManager;
+    private Player player;
     // Start is called before the first frame update
     void Start()
     {
 
         sp = GetComponent<SpriteRenderer>();
+        player = transform.GetComponent<Hand>();
         colorPanel.SetActive(false);
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         Debug.Log("Blue: " + _uiManager.so.blue);
@@ -69,11 +71,13 @@ public class PickColor : MonoBehaviour
     public void ChangeColor()
     {
         colorPanel.SetActive(true);
+        player.MoveableFalse();
 
     }
 
     public void ResumeGame()
     {
+        player.MoveableTrue();
         _uiManager.SaveColor(m_Red, m_Green, m_Blue);
         _uiManager.SaveGame();
         colorPanel.SetActive(false);

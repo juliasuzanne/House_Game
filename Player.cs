@@ -21,11 +21,11 @@ public class Player : MonoBehaviour
     float xInput, yInput, zInput;
     private RaycastHit2D hit;
     private Vector3 targetPos;
-    SpriteRenderer sp;
     NavMeshAgent agent;
     private bool moveable = true;
     private bool collided = false;
     Rigidbody2D rb;
+    SpriteRenderer sp;
     private Animator animator;
     private GameObject dialogue;
     // Start is called before the first frame update

@@ -20,6 +20,7 @@ public class MakeActiveOnClick : MonoBehaviour
         else
         {
             _panel.SetActive(true);
+            transform.gameObject.SetActive(false);
         }
     }
 

@@ -23,7 +23,7 @@ public class PickColor : MonoBehaviour
     [SerializeField]
     private Slider greenSlider;
     private UIManager _uiManager;
-    private Player player;
+    private Hand player;
     // Start is called before the first frame update
     void Start()
     {

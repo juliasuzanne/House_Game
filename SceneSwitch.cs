@@ -71,5 +71,11 @@ public class SceneSwitch : MonoBehaviour
         SceneManager.LoadScene(5);
     }
 
+    public void GoToCave()
+    {
+        _uiManager.SaveGame();
+        SceneManager.LoadScene(8);
+    }
+
 
 }

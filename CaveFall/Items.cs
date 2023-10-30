@@ -7,7 +7,7 @@ public class Items : MonoBehaviour
     [SerializeField]
     private float _speed = 3f;
 
-    private Player _player;
+    private Hand _player;
 
     //ID for powerups to make script modular
     //0 = Triple Shot

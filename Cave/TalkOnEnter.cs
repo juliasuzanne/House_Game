@@ -7,6 +7,10 @@ public class TalkOnEnter : MonoBehaviour
 {
     [SerializeField]
     private GameObject _panel;
+    [SerializeField]
+    private GameObject _Broom;
+    [SerializeField]
+    private GameObject _invButton;
 
     [SerializeField]
     private Text _text;
@@ -28,28 +32,36 @@ public class TalkOnEnter : MonoBehaviour
     }
     void OnMouseDown()
     {
-        if (count <= strings.Length)
+        if (count < strings.Length)
         {
             count = count + 1;
             _text.text = strings[count];
             _text.enabled = true;
-            if (count == 3)
+            if (count == 4)
             {
                 _panel.SetActive(true);
 
             }
-            else
+            else if (count == 6)
             {
-                _panel.SetActive(false);
+                _invButton.SetActive(true);
             }
+
+            else if (count == 8)
+            {
+                _Broom.SetActive(false);
+            }
+
+
+
 
         }
 
 
-        else if (count > strings.Length)
+        else
         {
             _text.enabled = false;
-            count = 5;
+
         }
 
     }

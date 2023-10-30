@@ -24,6 +24,7 @@ public class ChangeTextOnClick : MonoBehaviour
     _text = transform.gameObject.GetComponent<Text>();
     _sceneManager = GameObject.Find("GameManager").GetComponent<SceneSwitch>();
     Debug.Log(strings.Length);
+    _text.enabled = true;
 
 
   }
@@ -34,11 +35,12 @@ public class ChangeTextOnClick : MonoBehaviour
     {
       count = count + 1;
       _text.text = strings[count];
+      _text.enabled = true;
 
     }
 
 
-    else if (finishConversation == true)
+    else if (count == strings.Length)
     {
       _text.enabled = false;
     }

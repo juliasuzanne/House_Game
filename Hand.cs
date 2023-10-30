@@ -53,7 +53,10 @@ public class Hand : MonoBehaviour
 
     void PlatformerMove()
     {
-
+        if (Input.GetKeyDown(KeyCode.Space) && _grounded == true)
+        {
+            transform.Translate(Vector3.up * Time.deltaTime * _jumpForce);
+        }
 
 
         if (moveable == true)
@@ -108,7 +111,7 @@ public class Hand : MonoBehaviour
 
     void CheckGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 1.0f, 1 << 12);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 6.0f, 1 << 12);
         Debug.DrawRay(transform.position, -Vector2.up, Color.green);
 
         if (hit.collider != null)

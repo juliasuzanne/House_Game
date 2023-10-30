@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TalkOnEnter : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject _panel;
 
     void Start()
     {
@@ -14,6 +16,7 @@ public class TalkOnEnter : MonoBehaviour
         if (other.tag == "Player")
         {
             Debug.Log("Player collision with NPC");
+            _panel.SetActive(true);
         }
     }
 }

@@ -10,6 +10,9 @@ public class Hand : MonoBehaviour
     private int _jumpForce = 5;
     [SerializeField]
     private float _moveSpeed = 2f;
+    [SerializeField]
+
+    private float _fallSpeed = -1.2f;
     private bool falling = false;
     private bool moveable = false;
     private bool _grounded = false;
@@ -68,9 +71,10 @@ public class Hand : MonoBehaviour
                 Debug.Log("space key down");
 
             }
+
             else
             {
-                yInput = -1.2f;
+                yInput = _fallSpeed;
                 // yInput = Input.GetAxis("Vertical");
 
             }

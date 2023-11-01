@@ -22,18 +22,22 @@ public class Items : MonoBehaviour
     //2 = Shields
     [SerializeField]
     private int _powerupID;
+    [SerializeField]
+
     private Animator _anim;
 
-    private bool powerup1_bool = false;
-    private bool powerup2_bool = false;
-    private bool powerup3_bool = false;
+    private bool leafy = false;
+    private bool rocky = false;
+    private bool allItemsCollected = false;
+
+    private bool bandy = false;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        _anim = GetComponent<Animator>();
+        _anim = GameObject.Find("Background").GetComponent<Animator>();
         _player = GameObject.Find("Player").GetComponent<Hand>();
         notepaper = GameObject.Find("notepaper");
         if (_player == null)
@@ -43,9 +47,6 @@ public class Items : MonoBehaviour
         powerup1 = notepaper.transform.GetChild(0).GetComponent<ChangeSprite>();
         powerup2 = notepaper.transform.GetChild(1).GetComponent<ChangeSprite>();
         powerup3 = notepaper.transform.GetChild(2).GetComponent<ChangeSprite>();
-        Debug.Log(powerup1.name);
-        Debug.Log(powerup2.name);
-        Debug.Log(powerup3.name);
 
 
 
@@ -55,6 +56,11 @@ public class Items : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("BAND IS " + bandy);
+
+        Debug.Log("LEAF IS " + leafy);
+        Debug.Log("ROCK IS " + rocky);
+
         //move down at a speed of 3
         //will not be reused
         //when we leave the screen, destroy this object
@@ -78,20 +84,20 @@ public class Items : MonoBehaviour
             switch (_powerupID)
             {
                 case 0:
-                    powerup1_bool = true;
+                    bandy = true;
                     CheckItems();
                     Debug.Log("add band to inventory");
                     powerup1.ChangeTheSprite();
                     Destroy(this.gameObject);
                     break;
                 case 1:
-                    powerup2_bool = true;
+                    leafy = true;
                     CheckItems();
                     powerup2.ChangeTheSprite();
                     Destroy(this.gameObject);
                     break;
                 case 2:
-                    powerup3_bool = true;
+                    rocky = true;
                     CheckItems();
                     powerup3.ChangeTheSprite();
                     Destroy(this.gameObject);
@@ -103,9 +109,11 @@ public class Items : MonoBehaviour
 
     void CheckItems()
     {
-        if (powerup1_bool == true && powerup2_bool == true && powerup2_bool == true)
+        if (leafy == true && bandy == true && rocky == true)
         {
-            _anim.SetTrigger("StopFalling");
+            allItemsCollected = true;
         }
+
     }
+
 }

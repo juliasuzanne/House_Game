@@ -5,18 +5,55 @@ using UnityEngine;
 public class BackgroundCaveFall : MonoBehaviour
 {
     private Hand _player;
+    private Animator _anim;
+
+    private bool obj1;
+    private bool obj2;
+    private bool obj3;
+
 
     // Start is called before the first frame update
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Hand>();
         _player.MoveableTrue();
+        _anim = GameObject.Find("Background").GetComponent<Animator>();
+
+    }
+
+    void Update()
+    {
+        Debug.Log("BAND IS " + obj1);
+        Debug.Log("LEAF IS " + obj2);
+        Debug.Log("ROCK IS " + obj3);
+
     }
 
     // Update is called once per frame
-    void Update()
+    public void ChangeObj1()
     {
+        obj1 = true;
+
+    }
+    public void ChangeObj2()
+    {
+        obj2 = true;
+
+    }
+    public void ChangeObj3()
+    {
+        obj3 = true;
 
 
     }
+
+    public void CheckObjs()
+    {
+        if (obj1 == true && obj2 == true && obj3 == true)
+        {
+            _anim.SetTrigger("StopFalling");
+        }
+    }
+
+
 }

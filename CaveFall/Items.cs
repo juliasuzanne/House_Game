@@ -15,7 +15,7 @@ public class Items : MonoBehaviour
 
     private ChangeSprite powerup3;
 
-
+    private BackgroundCaveFall _background;
     //ID for powerups to make script modular
     //0 = Triple Shot
     //1 = Speed
@@ -26,7 +26,7 @@ public class Items : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _background = GameObject.Find("Background/Set").GetComponent<BackgroundCaveFall>();
         _player = GameObject.Find("Player").GetComponent<Hand>();
         notepaper = GameObject.Find("notepaper");
         if (_player == null)
@@ -71,18 +71,21 @@ public class Items : MonoBehaviour
             switch (_powerupID)
             {
                 case 0:
-                    CheckItems();
+                    _background.ChangeObj1();
+                    _background.CheckObjs();
                     Debug.Log("add band to inventory");
                     powerup1.ChangeTheSprite();
                     Destroy(this.gameObject);
                     break;
                 case 1:
-                    CheckItems();
+                    _background.ChangeObj2();
+                    _background.CheckObjs();
                     powerup2.ChangeTheSprite();
                     Destroy(this.gameObject);
                     break;
                 case 2:
-                    CheckItems();
+                    _background.ChangeObj3();
+                    _background.CheckObjs();
                     powerup3.ChangeTheSprite();
                     Destroy(this.gameObject);
                     break;

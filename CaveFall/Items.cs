@@ -22,22 +22,11 @@ public class Items : MonoBehaviour
     //2 = Shields
     [SerializeField]
     private int _powerupID;
-    [SerializeField]
-
-    private Animator _anim;
-
-    private bool leafy = false;
-    private bool rocky = false;
-    private bool allItemsCollected = false;
-
-    private bool bandy = false;
-
-
 
     // Start is called before the first frame update
     void Start()
     {
-        _anim = GameObject.Find("Background").GetComponent<Animator>();
+
         _player = GameObject.Find("Player").GetComponent<Hand>();
         notepaper = GameObject.Find("notepaper");
         if (_player == null)
@@ -56,10 +45,7 @@ public class Items : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("BAND IS " + bandy);
 
-        Debug.Log("LEAF IS " + leafy);
-        Debug.Log("ROCK IS " + rocky);
 
         //move down at a speed of 3
         //will not be reused
@@ -73,6 +59,8 @@ public class Items : MonoBehaviour
         }
     }
 
+
+
     //check for collisions
     //OnTriggerCollison2D
     //use tages to collect by player only
@@ -80,24 +68,20 @@ public class Items : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-
             switch (_powerupID)
             {
                 case 0:
-                    bandy = true;
                     CheckItems();
                     Debug.Log("add band to inventory");
                     powerup1.ChangeTheSprite();
                     Destroy(this.gameObject);
                     break;
                 case 1:
-                    leafy = true;
                     CheckItems();
                     powerup2.ChangeTheSprite();
                     Destroy(this.gameObject);
                     break;
                 case 2:
-                    rocky = true;
                     CheckItems();
                     powerup3.ChangeTheSprite();
                     Destroy(this.gameObject);
@@ -107,13 +91,5 @@ public class Items : MonoBehaviour
         }
     }
 
-    void CheckItems()
-    {
-        if (leafy == true && bandy == true && rocky == true)
-        {
-            allItemsCollected = true;
-        }
-
-    }
 
 }

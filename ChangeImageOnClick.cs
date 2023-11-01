@@ -15,6 +15,7 @@ public class ChangeImageOnClick : MonoBehaviour
     void Start()
     {
         _image = transform.GetComponent<Image>();
+        Debug.Log("Image: " + _image);
     }
 
     // Update is called once per frame
@@ -25,7 +26,7 @@ public class ChangeImageOnClick : MonoBehaviour
 
     public void OnToggleImage()
     {
-        if (_image.sprite == CloseBox)
+        if (_image.sprite.name == "CloseBox")
         {
             _image.sprite = OpenBox;
         }

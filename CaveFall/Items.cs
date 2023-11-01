@@ -73,15 +73,15 @@ public class Items : MonoBehaviour
             {
                 case 0:
                     Debug.Log("add band to inventory");
-                    notepaper.transform.GetChild(0).GetComponent<ChangeSprite>().ChangeTheSprite();
+                    powerup1.ChangeTheSprite();
                     Destroy(this.gameObject);
                     break;
                 case 1:
-                    notepaper.transform.GetChild(1).GetComponent<ChangeSprite>().ChangeTheSprite();
+                    powerup2.ChangeTheSprite();
                     Destroy(this.gameObject);
                     break;
                 case 2:
-                    powerup2.ChangeTheSprite();
+                    powerup3.ChangeTheSprite();
                     Destroy(this.gameObject);
                     break;
             }

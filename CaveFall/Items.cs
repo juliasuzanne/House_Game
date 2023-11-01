@@ -8,6 +8,13 @@ public class Items : MonoBehaviour
     private float _speed = 3f;
 
     private Hand _player;
+    [SerializeField]
+    private GameObject notepaper;
+    private ChangeSprite powerup1;
+    private ChangeSprite powerup2;
+
+    private ChangeSprite powerup3;
+
 
     //ID for powerups to make script modular
     //0 = Triple Shot
@@ -22,11 +29,19 @@ public class Items : MonoBehaviour
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Hand>();
-
+        notepaper = GameObject.Find("notepaper");
         if (_player == null)
         {
             Debug.LogError("The player is NULL");
         }
+        powerup1 = notepaper.transform.GetChild(0).GetComponent<ChangeSprite>();
+        powerup2 = notepaper.transform.GetChild(1).GetComponent<ChangeSprite>();
+        powerup3 = notepaper.transform.GetChild(2).GetComponent<ChangeSprite>();
+        Debug.Log(powerup1.name);
+        Debug.Log(powerup2.name);
+        Debug.Log(powerup3.name);
+
+
 
 
     }
@@ -58,12 +73,15 @@ public class Items : MonoBehaviour
             {
                 case 0:
                     Debug.Log("add band to inventory");
+                    notepaper.transform.GetChild(0).GetComponent<ChangeSprite>().ChangeTheSprite();
                     Destroy(this.gameObject);
                     break;
                 case 1:
+                    notepaper.transform.GetChild(1).GetComponent<ChangeSprite>().ChangeTheSprite();
                     Destroy(this.gameObject);
                     break;
                 case 2:
+                    powerup2.ChangeTheSprite();
                     Destroy(this.gameObject);
                     break;
             }

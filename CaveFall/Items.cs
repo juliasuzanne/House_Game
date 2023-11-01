@@ -22,12 +22,18 @@ public class Items : MonoBehaviour
     //2 = Shields
     [SerializeField]
     private int _powerupID;
-    [SerializeField]
+    private Animator _anim;
+
+    private bool powerup1_bool = false;
+    private bool powerup2_bool = false;
+    private bool powerup3_bool = false;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
+        _anim = GetComponent<Animator>();
         _player = GameObject.Find("Player").GetComponent<Hand>();
         notepaper = GameObject.Find("notepaper");
         if (_player == null)
@@ -72,20 +78,34 @@ public class Items : MonoBehaviour
             switch (_powerupID)
             {
                 case 0:
+                    powerup1_bool = true;
+                    CheckItems();
                     Debug.Log("add band to inventory");
                     powerup1.ChangeTheSprite();
                     Destroy(this.gameObject);
                     break;
                 case 1:
+                    powerup2_bool = true;
+                    CheckItems();
                     powerup2.ChangeTheSprite();
                     Destroy(this.gameObject);
                     break;
                 case 2:
+                    powerup3_bool = true;
+                    CheckItems();
                     powerup3.ChangeTheSprite();
                     Destroy(this.gameObject);
                     break;
             }
 
+        }
+    }
+
+    void CheckItems()
+    {
+        if (powerup1_bool == true && powerup2_bool == true && powerup2_bool == true)
+        {
+            _anim.SetTrigger("StopFalling");
         }
     }
 }

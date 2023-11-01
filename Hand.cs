@@ -26,6 +26,8 @@ public class Hand : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0f;
+
         animator = transform.GetComponent<Animator>();
         sp = GetComponent<SpriteRenderer>();
 
@@ -51,6 +53,11 @@ public class Hand : MonoBehaviour
     public void MoveableTrue()
     {
         moveable = true;
+    }
+
+    public void UseGravity()
+    {
+        rb.gravityScale = 6.5f;
     }
 
 

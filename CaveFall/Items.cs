@@ -57,6 +57,7 @@ public class Items : MonoBehaviour
             switch (_powerupID)
             {
                 case 0:
+                    Debug.Log("add band to inventory");
                     Destroy(this.gameObject);
                     break;
                 case 1:

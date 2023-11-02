@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sp;
     private Animator animator;
+    private UIManager _uiManager;
+    private Color m_NewColor;
     private GameObject dialogue;
     // Start is called before the first frame update
 
@@ -38,8 +41,13 @@ public class Player : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-        // m_NewColor = new Color(_uiManager.so.red, _uiManager.so.blue, _uiManager.so.green);
-        // sp.color = m_NewColor;
+        _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        if (_uiManager == null)
+        {
+            Debug.LogError("!!!The UI MANAGER IS NULL");
+        }
+        m_NewColor = new Color(_uiManager.so.red, _uiManager.so.blue, _uiManager.so.green);
+        sp.color = m_NewColor;
     }
     void Start()
     {

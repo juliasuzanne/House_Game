@@ -65,6 +65,13 @@ public class SceneSwitch : MonoBehaviour
 
     }
 
+    public void GoToClearing()
+    {
+        _uiManager.SaveGame();
+        SceneManager.LoadScene(9);
+
+    }
+
     public void GoToTable()
     {
         _uiManager.SaveGame();

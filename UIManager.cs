@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
         _panel.gameObject.SetActive(false);
         _inventoryUI.gameObject.SetActive(false);
 
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
         if (_gameManager == null)
         {

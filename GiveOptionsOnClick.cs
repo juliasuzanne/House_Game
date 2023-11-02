@@ -34,9 +34,13 @@ public class GiveOptionsOnClick : MonoBehaviour
     {
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Hand>();
         _playerText.gameObject.SetActive(false);
         _panel.SetActive(false);
+        if (_uiManager == null)
+        {
+            Debug.Log("THE UI MANAGER IS NULL");
+        }
 
 
     }
@@ -49,34 +53,36 @@ public class GiveOptionsOnClick : MonoBehaviour
 
     void OnMouseDown()
     {
-        GiveOptions();
         Debug.Log("Mouse Down on Options");
-    }
-
-    public void GiveOptions()
-    {
-
-        _uiManager.HideInventory();
+        //_uiManager.HideInventory();
         playerScript.MoveableFalse();
         _panel.SetActive(true);
-
     }
 
-    public void OptionA()
-    {
-        Debug.Log("A PRESSED");
-        _uiManager.HideInventory();
-        playerScript.MoveableTrue();
-        _panel.SetActive(false);
-    }
+    // public void GiveOptions()
+    // {
 
-    public void OptionB()
-    {
-        Debug.Log("B PRESSED");
-        _uiManager.HideInventory();
-        playerScript.MoveableTrue();
-        _panel.SetActive(false);
-    }
+    //     _uiManager.HideInventory();
+    //     playerScript.MoveableFalse();
+    //     _panel.SetActive(true);
+
+    // }
+
+    // public void OptionA()
+    // {
+    //     Debug.Log("A PRESSED");
+    //     _uiManager.HideInventory();
+    //     playerScript.MoveableTrue();
+    //     _panel.SetActive(false);
+    // }
+
+    // public void OptionB()
+    // {
+    //     Debug.Log("B PRESSED");
+    //     _uiManager.HideInventory();
+    //     playerScript.MoveableTrue();
+    //     _panel.SetActive(false);
+    // }
 
 
 }

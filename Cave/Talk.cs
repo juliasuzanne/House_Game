@@ -19,6 +19,7 @@ public class Talk : MonoBehaviour
     {
         transform.gameObject.SetActive(false);
         platform.SetActive(false);
+        player.UseGravity();
 
     }
 

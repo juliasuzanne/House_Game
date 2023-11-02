@@ -28,13 +28,13 @@ public class GiveOptionsOnClickHand : MonoBehaviour
 
     private UIManager _uiManager;
 
-    private Player playerScript;
+    private Hand playerScript;
 
     private void Start()
     {
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Hand>();
         _playerText.gameObject.SetActive(false);
         _panel.SetActive(false);
         if (_uiManager == null)
@@ -51,10 +51,10 @@ public class GiveOptionsOnClickHand : MonoBehaviour
         _playerText.gameObject.transform.position = playerPos;
     }
 
-    void OnMouseDown()
+    void OnTriggerEnter2D()
     {
         Debug.Log("Mouse Down on Options");
-        _uiManager.HideInventory();
+        // _uiManager.HideInventory();
         playerScript.MoveableFalse();
         _panel.SetActive(true);
     }
@@ -71,7 +71,6 @@ public class GiveOptionsOnClickHand : MonoBehaviour
     public void OptionA()
     {
         Debug.Log("A PRESSED");
-        _uiManager.HideInventory();
         playerScript.MoveableTrue();
         _panel.SetActive(false);
     }

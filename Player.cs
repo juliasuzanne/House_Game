@@ -38,6 +38,8 @@ public class Player : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        // m_NewColor = new Color(_uiManager.so.red, _uiManager.so.blue, _uiManager.so.green);
+        // sp.color = m_NewColor;
     }
     void Start()
     {

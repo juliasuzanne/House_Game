@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine.Events;
 
 
-public class GiveOptionsOnClick : MonoBehaviour
+public class GiveOptionsOnClickHand : MonoBehaviour
 {
     // Start is called before the first frame update
     private Transform player;

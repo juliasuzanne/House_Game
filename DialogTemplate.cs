@@ -61,8 +61,14 @@ public abstract class DialogTemplate : MonoBehaviour
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _NPCText = GameObject.Find("NPC").transform.GetChild(0).GetChild(0).gameObject.transform.GetComponent<Text>();
+        _playerText = player.GetChild(0).GetChild(0).gameObject.transform.GetComponent<Text>();
+
+
         _playerText.gameObject.SetActive(false);
         _panel = this.gameObject.transform.GetChild(2).gameObject;
+        AButton = _panel.transform.GetChild(0).GetComponent<Button>();
+        BButton = _panel.transform.GetChild(1).GetComponent<Button>();
         _panel.SetActive(false);
         _NPCText.gameObject.SetActive(true);
         _AText = this.gameObject.transform.GetChild(2).GetChild(0).GetChild(0).gameObject.transform.GetComponent<TMPro.TextMeshProUGUI>();

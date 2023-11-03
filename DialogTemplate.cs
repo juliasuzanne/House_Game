@@ -9,41 +9,41 @@ using UnityEngine.Events;
 public abstract class DialogTemplate : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Transform player;
+    protected Transform player;
     [SerializeField]
-    private Text _playerText;
+    protected Text _playerText;
     [SerializeField]
-    private Text _NPCText;
-    private bool collided = false;
-    private int _case;
-    private int _choice;
+    protected Text _NPCText;
+    protected bool collided = false;
+    protected int _case;
+    protected int _choice;
 
     [SerializeField]
-    private TMPro.TextMeshProUGUI _AText;
+    protected TMPro.TextMeshProUGUI _AText;
     [SerializeField]
-    private TMPro.TextMeshProUGUI _BText;
+    protected TMPro.TextMeshProUGUI _BText;
     [SerializeField]
-    private string[] NPCText_string;
+    protected string[] NPCText_string;
     [SerializeField]
-    private string[] PlayerText_string;
+    protected string[] PlayerText_string;
     [SerializeField]
-    private string[] PlayerText_OptionA;
+    protected string[] PlayerText_OptionA;
     [SerializeField]
-    private string[] PlayerText_OptionB;
+    protected string[] PlayerText_OptionB;
     [SerializeField]
-    private GameObject _panel;
+    protected GameObject _panel;
     [SerializeField]
-    private Button AButton;
+    protected Button AButton;
     [SerializeField]
-    private Button BButton;
+    protected Button BButton;
 
-    private bool runRoutine = true;
+    protected bool runRoutine = true;
 
     public GameObject clicked_Object;
 
-    private UIManager _uiManager;
+    protected UIManager _uiManager;
 
-    private Player playerScript;
+    protected Player playerScript;
 
     public void CollidedIsFalse()
     {
@@ -103,14 +103,14 @@ public abstract class DialogTemplate : MonoBehaviour
         _NPCText.gameObject.SetActive(false);
 
     }
-    private void NPCTalking()
+    protected void NPCTalking()
     {
         _playerText.gameObject.SetActive(false);
         _NPCText.gameObject.SetActive(true);
 
     }
 
-    private void NPCTalkThenPanel(int NPCstring, int AString, int BString)
+    protected void NPCTalkThenPanel(int NPCstring, int AString, int BString)
     {
         NPCTalking();
         _NPCText.text = NPCText_string[NPCstring];
@@ -119,14 +119,14 @@ public abstract class DialogTemplate : MonoBehaviour
         _BText.text = PlayerText_OptionB[BString];
     }
 
-    private void PlayerSaySomething(int PlayerString)
+    protected void PlayerSaySomething(int PlayerString)
     {
         PlayerTalking();
         _panel.SetActive(false);
         _playerText.text = PlayerText_string[PlayerString];
     }
 
-    private void EndConversation()
+    protected void EndConversation()
     {
         _playerText.gameObject.SetActive(false);
         runRoutine = true;
@@ -135,9 +135,8 @@ public abstract class DialogTemplate : MonoBehaviour
         playerScript.MoveableTrue();
     }
 
-    private IEnumerator MoveThroughDialogue()
+    protected void SetupConversation()
     {
-        //setup for conversation
         NPCTalking();
         runRoutine = false;
         _uiManager.HideInventory();
@@ -145,6 +144,11 @@ public abstract class DialogTemplate : MonoBehaviour
         _NPCText.text = NPCText_string[0];
         _AText.text = PlayerText_OptionA[0];
         _BText.text = PlayerText_OptionB[0];
+    }
+    protected virtual IEnumerator MoveThroughDialogue()
+    {
+        //setup for conversation
+        SetupConversation();
         //WAIT FOR CLICK, REVEAL PANEL
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         _panel.SetActive(true);

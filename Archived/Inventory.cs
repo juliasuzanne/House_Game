@@ -8,6 +8,22 @@ public class Inventory : MonoBehaviour
    public GameObject[] slots; // this to place items in the center of each slot, or drop
    public GameObject[] items; // 
 
+   //variable gameObject item
+   public void AddItemToInventory()
+   {
+      foreach (bool full in isFull)
+      {
+         if (full == true)
+         {
+            Debug.Log(full + " is TRUE");
+         }
+         else
+         {
+            Debug.Log(full + " is FALSE");
+         }
+      }
+   }
+
 }
 
 

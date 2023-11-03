@@ -16,15 +16,21 @@ public class Inventory : MonoBehaviour
       {
          if (full == false)
          {
-            Debug.Log(full + " is FALSE");
+            Vector3 slotPos = new Vector3(slots[count].transform.position.x, slots[count].transform.position.y, 95f);
+            Debug.Log(count + " is FALSE");
             items[count] = prefab;
             isFull[count] = true;
-            Instantiate(prefab, new Vector3(0, 0, 0), Quaternion.identity, slots[count].transform);
+            Instantiate(prefab, slotPos, Quaternion.identity, slots[count].transform);
             break;
          }
          else
          {
-            Debug.Log(full + " is TRUE");
+            if (count == slots.length)
+            {
+               Debug.Log("NO empty slots left");
+               break;
+            }
+            Debug.Log(count + " is TRUE");
          }
          count = count + 1;
       }

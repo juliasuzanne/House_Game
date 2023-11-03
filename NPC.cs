@@ -11,7 +11,7 @@ public class NPC : MonoBehaviour
     private Player _player;
 
     [SerializeField]
-    private Conversation _dialog;
+    private DialogCave _dialog;
 
 
 
@@ -19,7 +19,7 @@ public class NPC : MonoBehaviour
     void Start()
     {
         _dialogGameObject = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).gameObject;
-        _dialog = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).GetComponent<Conversation>();
+        _dialog = GameObject.FindGameObjectWithTag("Player").gameObject.transform.GetChild(0).GetComponent<DialogCave>();
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
         // Debug.Log("Get Dialog: " + _dialog);

@@ -25,7 +25,7 @@ public class Inventory : MonoBehaviour
          }
          else
          {
-            if (count == slots.length)
+            if (count == slots.Length)
             {
                Debug.Log("NO empty slots left");
                break;

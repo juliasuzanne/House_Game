@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Inventory : MonoBehaviour
 {
@@ -8,9 +10,23 @@ public class Inventory : MonoBehaviour
    public GameObject[] slots; // this to place items in the center of each slot, or drop
    public GameObject[] items; // 
    private int count = 0;
-   //variable gameObject item
+   private Text _playerText;
+   private Transform _player;
+   private GameObject _dialog;
+   private Player _playerScript;
+
+
+   void Start()
+   {
+      _player = GameObject.Find("Player").transform;
+      _playerScript = GameObject.Find("Player").transform.GetComponent<Player>();
+      _dialog = _player.GetChild(0).GetChild(0).gameObject;
+      _playerText = GameObject.Find("Player").transform.GetChild(0).GetChild(0).gameObject.transform.GetComponent<Text>();
+   }
+
    public void AddItemToInventory(GameObject prefab)
    {
+
       count = 0;
       foreach (bool full in isFull)
       {
@@ -27,13 +43,22 @@ public class Inventory : MonoBehaviour
          {
             if (count == slots.Length - 1)
             {
-               Debug.Log("NO empty slots left");
+               _dialog.SetActive(true);
+               _playerText.text = "I guess I need to get rid of something";
+               StartCoroutine("LetPlayerTalk");
                break;
             }
             Debug.Log(count + " is TRUE");
          }
          count = count + 1;
       }
+   }
+
+   IEnumerator LetPlayerTalk()
+   {
+      yield return new WaitForSeconds(3f);
+      _dialog.SetActive(false);
+
    }
 
 }

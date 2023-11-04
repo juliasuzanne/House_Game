@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
       {
          if (full == false)
          {
-            Vector3 slotPos = new Vector3(slots[count].transform.position.x, slots[count].transform.position.y, 95f);
+            Vector3 slotPos = new Vector3(slots[count].transform.position.x, slots[count].transform.position.y, 79f);
             Debug.Log(count + " is FALSE");
             items[count] = prefab;
             isFull[count] = true;

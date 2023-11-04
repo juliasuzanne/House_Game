@@ -14,6 +14,13 @@ public class Items : MonoBehaviour
     private ChangeSprite powerup2;
 
     private ChangeSprite powerup3;
+    [SerializeField]
+    private GameObject prefab1;
+    [SerializeField]
+    private GameObject prefab2;
+    [SerializeField]
+    private GameObject prefab3;
+
 
     private BackgroundCaveFall _background;
     //ID for powerups to make script modular
@@ -22,6 +29,7 @@ public class Items : MonoBehaviour
     //2 = Shields
     [SerializeField]
     private int _powerupID;
+    private Inventory _inventory;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +44,7 @@ public class Items : MonoBehaviour
         powerup1 = notepaper.transform.GetChild(0).GetComponent<ChangeSprite>();
         powerup2 = notepaper.transform.GetChild(1).GetComponent<ChangeSprite>();
         powerup3 = notepaper.transform.GetChild(2).GetComponent<ChangeSprite>();
+        _inventory = GameObject.Find("Player").transform.GetComponent<Inventory>();
 
 
 
@@ -75,18 +84,21 @@ public class Items : MonoBehaviour
                     _background.CheckObjs();
                     Debug.Log("add band to inventory");
                     powerup1.ChangeTheSprite();
+                    _inventory.AddItemToInventory(prefab1);
                     Destroy(this.gameObject);
                     break;
                 case 1:
                     _background.ChangeObj2();
                     _background.CheckObjs();
                     powerup2.ChangeTheSprite();
+                    _inventory.AddItemToInventory(prefab2);
                     Destroy(this.gameObject);
                     break;
                 case 2:
                     _background.ChangeObj3();
                     _background.CheckObjs();
                     powerup3.ChangeTheSprite();
+                    _inventory.AddItemToInventory(prefab3);
                     Destroy(this.gameObject);
                     break;
             }

@@ -37,11 +37,6 @@ public class InventoryPickup : MonoBehaviour
         mouseButtonReleased = true;
     }
 
-    void OnMouseDown()
-    {
-        mouseButtonReleased = false;
-    }
-
     private void StopMoving()
     {
         transform.position = startingPos;

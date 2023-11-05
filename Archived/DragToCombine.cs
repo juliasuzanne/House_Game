@@ -9,6 +9,7 @@ public class DragToCombine : MonoBehaviour
     private float offsetX, offsetY;
     public static bool mouseButtonReleased;
 
+
     private void OnMouseDown()
     {
         mouseButtonReleased = false;
@@ -20,6 +21,7 @@ public class DragToCombine : MonoBehaviour
     {
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector3(mousePosition.x - offsetX, mousePosition.y - offsetY, transform.position.z);
+
     }
 
     private void OnMouseUp()

@@ -11,6 +11,7 @@ public class TalkOnEnter : MonoBehaviour
     private GameObject _Broom;
     [SerializeField]
     private GameObject _invButton;
+    private SpriteRenderer spEye;
 
     [SerializeField]
     private Text _text;
@@ -25,6 +26,7 @@ public class TalkOnEnter : MonoBehaviour
 
     void Start()
     {
+        spEye = GameObject.Find("Player").transform.GetChild(2).transform.GetComponent<SpriteRenderer>();
         _sceneManager = GameObject.Find("GameManager").GetComponent<SceneSwitch>();
         _text.enabled = true;
 
@@ -40,6 +42,7 @@ public class TalkOnEnter : MonoBehaviour
             if (count == 4)
             {
                 _panel.SetActive(true);
+                spEye.color = Color.white;
 
             }
             else if (count == 6)

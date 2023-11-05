@@ -9,6 +9,9 @@ public class DragToCombine : MonoBehaviour
     private float offsetX, offsetY;
     public static bool mouseButtonReleased;
 
+    [SerializeField]
+    private float maxX, minX, maxY, minY;
+
 
 
     private void OnMouseDown()
@@ -21,7 +24,7 @@ public class DragToCombine : MonoBehaviour
     private void OnMouseDrag()
     {
         Debug.Log("CURRENT MIRROR POS: " + transform.position);
-        if (transform.position.x > 6.37f || transform.position.x < 2.18f || transform.position.y > -3.06f || transform.position.y < -7.01f)
+        if (transform.position.x > maxX || transform.position.x < minX || transform.position.y > maxY || transform.position.y < minY)
         {
             mouseButtonReleased = true;
             transform.position = new Vector3(4.67f, -4.68f, transform.position.z);

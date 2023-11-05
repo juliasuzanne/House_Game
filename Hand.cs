@@ -19,6 +19,8 @@ public class Hand : MonoBehaviour
 
     Rigidbody2D rb;
     SpriteRenderer sp;
+    SpriteRenderer spEye;
+
     private Animator animator;
     float xInput, yInput;
 
@@ -30,6 +32,7 @@ public class Hand : MonoBehaviour
 
         animator = transform.GetComponent<Animator>();
         sp = GetComponent<SpriteRenderer>();
+        spEye = transform.GetChild(2).GetComponent<SpriteRenderer>();
 
 
     }
@@ -38,11 +41,15 @@ public class Hand : MonoBehaviour
         if (xInput < -0.0001f)
         {
             sp.flipX = false;
+            spEye.flipX = false;
+
 
         }
         else if (xInput > 0.0001f)
         {
             sp.flipX = true;
+            spEye.flipX = true;
+
         }
     }
     public void MoveableFalse()

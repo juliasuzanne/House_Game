@@ -39,6 +39,7 @@ public class TalkOnEnter : MonoBehaviour
             count = count + 1;
             _text.text = strings[count];
             _text.enabled = true;
+
             if (count == 4)
             {
                 _panel.SetActive(true);

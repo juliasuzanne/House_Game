@@ -16,6 +16,12 @@ public class DragToCombine : MonoBehaviour
 
     private void OnMouseDown()
     {
+        Debug.Log("STARTING MIRROR POS: " + transform.position);
+        maxX = transform.position.x + 2.5f;
+        maxY = transform.position.y + 2.25f;
+        minX = transform.position.x - 2.5f;
+        minY = transform.position.y - 2.25f;
+
         mouseButtonReleased = false;
         offsetX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x;
         offsetY = Camera.main.ScreenToWorldPoint(Input.mousePosition).y - transform.position.y;
@@ -27,7 +33,7 @@ public class DragToCombine : MonoBehaviour
         if (transform.position.x > maxX || transform.position.x < minX || transform.position.y > maxY || transform.position.y < minY)
         {
             mouseButtonReleased = true;
-            transform.position = new Vector3(4.67f, -4.68f, transform.position.z);
+            transform.position = new Vector3(maxX - 2.5f, maxY - 2.25f, transform.position.z);
         }
         else
         {

@@ -54,6 +54,12 @@ public class Inventory : MonoBehaviour
       }
    }
 
+   public void RemoveItemFromInventory(int slotNum)
+   {
+      isFull[slotNum] = false;
+      items[slotNum] = null;
+   }
+
    IEnumerator LetPlayerTalk()
    {
       yield return new WaitForSeconds(3f);

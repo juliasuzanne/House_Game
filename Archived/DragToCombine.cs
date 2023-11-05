@@ -10,6 +10,7 @@ public class DragToCombine : MonoBehaviour
     public static bool mouseButtonReleased;
 
 
+
     private void OnMouseDown()
     {
         mouseButtonReleased = false;
@@ -19,8 +20,22 @@ public class DragToCombine : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = new Vector3(mousePosition.x - offsetX, mousePosition.y - offsetY, transform.position.z);
+        Debug.Log("CURRENT MIRROR POS: " + transform.position);
+        if (transform.position.x > 6.37f || transform.position.x < 2.18f || transform.position.y > -3.06f || transform.position.y < -7.01f)
+        {
+            mouseButtonReleased = true;
+            transform.position = new Vector3(4.67f, -4.68f, transform.position.z);
+        }
+        else
+        {
+            if (mouseButtonReleased == false)
+            {
+                mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                transform.position = new Vector3(mousePosition.x - offsetX, mousePosition.y - offsetY, transform.position.z);
+            }
+
+        }
+
 
     }
 

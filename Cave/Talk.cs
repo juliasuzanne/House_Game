@@ -7,7 +7,7 @@ public class Talk : MonoBehaviour
 {
     private Hand player;
     private GameObject platform;
-    private string text;
+    private Text text;
     private int count = 0;
 
     // Start is called before the first frame update
@@ -15,7 +15,7 @@ public class Talk : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Hand>();
         platform = GameObject.Find("Platform");
-        text = transform.GetChild(0).GetComponent<Text>().text;
+        text = transform.GetChild(0).GetComponent<Text>();
 
     }
 
@@ -23,22 +23,24 @@ public class Talk : MonoBehaviour
     {
         switch (count)
         {
-            case 0:
-                text = "What am I doing here?";
-                count = 1;
-                break;
-            case 1:
-                text = "I don't remember anything.";
-                count = 2;
-                break;
-            case 2:
-                text = "Is that me?";
-                count = 3;
-                break;
             case 3:
                 transform.gameObject.SetActive(false);
                 platform.SetActive(false);
                 player.UseGravity();
+                break;
+
+            case 2:
+                text.text = "Is that me?";
+                count = 3;
+                break;
+
+            case 1:
+                text.text = "I don't remember anything.";
+                count = 2;
+                break;
+            case 0:
+                text.text = "What am I doing here?";
+                count = 1;
                 break;
 
         }

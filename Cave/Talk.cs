@@ -16,6 +16,7 @@ public class Talk : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Hand>();
         platform = GameObject.Find("Platform");
         text = transform.GetChild(0).GetComponent<Text>();
+        text.text = "What is this place?";
 
     }
 

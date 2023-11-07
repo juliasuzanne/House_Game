@@ -29,7 +29,7 @@ public class DragToCombine : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        Debug.Log("CURRENT MIRROR POS: " + transform.position);
+        // Debug.Log("CURRENT MIRROR POS: " + transform.position);
         if (transform.position.x > maxX || transform.position.x < minX || transform.position.y > maxY || transform.position.y < minY)
         {
             mouseButtonReleased = true;

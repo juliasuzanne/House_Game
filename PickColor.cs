@@ -48,8 +48,7 @@ public class PickColor : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("X POS: " + transform.position.x);
-        Debug.Log("Y POS: " + transform.position.y);
+
         m_Red = redSlider.value;
 
         m_Blue = blueSlider.value;

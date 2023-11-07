@@ -24,6 +24,8 @@ public class PickColor : MonoBehaviour
     private Slider greenSlider;
     private UIManager _uiManager;
     private Hand player;
+    private float posX;
+    private float posY;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +35,6 @@ public class PickColor : MonoBehaviour
         colorPanel.SetActive(false);
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         Debug.Log("Blue: " + _uiManager.so.blue);
-        // sp.color = new Color(m_Red, m_Green, m_Blue);
         redSlider.value = _uiManager.so.red;
         greenSlider.value = _uiManager.so.green;
         blueSlider.value = _uiManager.so.blue;
@@ -47,6 +48,8 @@ public class PickColor : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("X POS: " + transform.position.x);
+        Debug.Log("Y POS: " + transform.position.y);
         m_Red = redSlider.value;
 
         m_Blue = blueSlider.value;
@@ -56,6 +59,8 @@ public class PickColor : MonoBehaviour
         m_NewColor = new Color(m_Red, m_Green, m_Blue);
 
         sp.color = m_NewColor;
+        Debug.Log("Sp color:" + sp.color);
+
     }
 
     public void SetColor(float red_m, float green_m, float blue_m)

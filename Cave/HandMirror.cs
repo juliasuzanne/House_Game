@@ -12,7 +12,7 @@ public class HandMirror : MonoBehaviour
     [SerializeField]
     private Slider redSlider;
 
-
+    private Hand _playerScript;
     [SerializeField]
     private Slider blueSlider;
 

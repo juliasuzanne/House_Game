@@ -17,6 +17,7 @@ public class TalkOnEnter : MonoBehaviour
     private Text _text;
     [SerializeField]
     private SceneSwitch _sceneManager;
+    private Hand _playerScript;
     private bool finishConversation = false;
 
     [SerializeField]
@@ -29,6 +30,8 @@ public class TalkOnEnter : MonoBehaviour
         spEye = GameObject.Find("Player").transform.GetChild(2).transform.GetComponent<SpriteRenderer>();
         _sceneManager = GameObject.Find("GameManager").GetComponent<SceneSwitch>();
         _text.enabled = true;
+        _playerScript = GameObject.Find("Player").GetComponent<Hand>();
+
 
 
     }
@@ -42,6 +45,7 @@ public class TalkOnEnter : MonoBehaviour
 
             if (count == 4)
             {
+                _playerScript.MoveableFalse();
                 _panel.SetActive(true);
                 spEye.color = Color.white;
 

@@ -19,7 +19,7 @@ public class HandMirror : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sp;
     SpriteRenderer spEye;
-
+    private PickColor _pickColorScript;
     private Animator animator;
     float xInput, yInput;
     float startingXPos, startingYPos, xZero, yZero, xOne, yOne;
@@ -39,6 +39,7 @@ public class HandMirror : MonoBehaviour
         yZero = startingYPos - 2.25f;
         xOne = startingXPos + 6.15f;
         yOne = startingYPos + 2.25f;
+        _pickColorScript = GameObject.Find("Player").GetComponent<PickColor>();
 
 
     }
@@ -49,6 +50,7 @@ public class HandMirror : MonoBehaviour
         ChangeColor();
 
         m_NewColor = new Color(m_Red, m_Green, m_Blue);
+        _pickColorScript.SetColor(m_Red, m_Green, m_Blue);
 
         im.color = m_NewColor;
 

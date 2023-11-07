@@ -26,6 +26,8 @@ public class PickColor : MonoBehaviour
     private Hand player;
     private float posX;
     private float posY;
+    [SerializeField]
+    private float alphaStart = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,13 +36,13 @@ public class PickColor : MonoBehaviour
         player = transform.GetComponent<Hand>();
         colorPanel.SetActive(false);
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
-        Debug.Log("Blue: " + _uiManager.so.blue);
-        redSlider.value = _uiManager.so.red;
-        greenSlider.value = _uiManager.so.green;
-        blueSlider.value = _uiManager.so.blue;
+        // Debug.Log("Blue: " + _uiManager.so.blue);
+        // redSlider.value = _uiManager.so.red;
+        // greenSlider.value = _uiManager.so.green;
+        // blueSlider.value = _uiManager.so.blue;
 
         Debug.Log("Sp color:" + sp.color);
-        m_NewColor = new Color(_uiManager.so.red, _uiManager.so.blue, _uiManager.so.green);
+        m_NewColor = new Color(_uiManager.so.red, _uiManager.so.green, _uiManager.so.blue, alphaStart);
 
         sp.color = m_NewColor;
 
@@ -48,16 +50,6 @@ public class PickColor : MonoBehaviour
 
     void Update()
     {
-
-        m_Red = redSlider.value;
-
-        m_Blue = blueSlider.value;
-
-        m_Green = greenSlider.value;
-
-        m_NewColor = new Color(m_Red, m_Green, m_Blue);
-
-        sp.color = m_NewColor;
         Debug.Log("Sp color:" + sp.color);
 
     }

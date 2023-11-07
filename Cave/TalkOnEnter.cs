@@ -58,6 +58,7 @@ public class TalkOnEnter : MonoBehaviour
             else if (count == 8)
             {
                 _Broom.SetActive(false);
+                _playerScript.UseGravity();
             }
 
 

@@ -29,7 +29,7 @@ public class Hand : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0f;
+        rb.gravityScale = 2f;
 
         animator = transform.GetComponent<Animator>();
         sp = GetComponent<SpriteRenderer>();

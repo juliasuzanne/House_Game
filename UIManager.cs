@@ -171,7 +171,7 @@ public class UIManager : MonoBehaviour
         so.playerName = _name;
     }
 
-    public void SaveColor(float Red, float Green, float Blue)
+    public void SaveColor(float Red, float Green, float Blue, float Alpha)
     {
         so.red = Red;
         so.green = Green;

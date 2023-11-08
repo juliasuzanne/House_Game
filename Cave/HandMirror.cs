@@ -56,8 +56,8 @@ public class HandMirror : MonoBehaviour
 
         xInput = Input.GetAxis("Horizontal");
         yInput = Input.GetAxis("Vertical");
-        Debug.Log("Y MIRROR HAND: " + transform.position.y);
-        Debug.Log("X MIRROR HAND: " + transform.position.x);
+        // Debug.Log("Y MIRROR HAND: " + transform.position.y);
+        // Debug.Log("X MIRROR HAND: " + transform.position.x);
 
 
         PlatformerMove();

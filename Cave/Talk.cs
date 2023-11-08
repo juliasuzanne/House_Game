@@ -27,7 +27,7 @@ public class Talk : MonoBehaviour
             case 3:
                 transform.gameObject.SetActive(false);
                 platform.SetActive(false);
-                player.UseGravity();
+                player.UseGravity(5f);
                 break;
 
             case 2:

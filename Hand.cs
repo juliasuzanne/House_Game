@@ -22,7 +22,8 @@ public class Hand : MonoBehaviour
     SpriteRenderer spEye;
 
     private Animator animator;
-    float xInput, yInput;
+    float xInput;
+    float yInput = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -62,37 +63,47 @@ public class Hand : MonoBehaviour
         moveable = true;
     }
 
-    public void UseGravity()
+    public void UseGravity(float _speed)
     {
-        rb.gravityScale = 6.5f;
+        rb.gravityScale = _speed;
+    }
+
+    public void ChangeYInput(float _yInput)
+    {
+        yInput = _yInput;
+
     }
 
 
     void PlatformerMove()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _grounded == true)
-        {
-            transform.Translate(Vector3.up * Time.deltaTime * _jumpForce);
-        }
+        // if (Input.GetKeyDown(KeyCode.Space) && _grounded == true)
+        // {
+        //     transform.Translate(Vector3.up * Time.deltaTime * _jumpForce);
+        // }
 
 
         if (moveable == true)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && _grounded == true)
-            {
-                yInput = _jumpForce;
+            // if (Input.GetKeyDown(KeyCode.Space) && _grounded == true)
+            // {
+            //     yInput = _jumpForce;
 
-                Debug.Log("space key down");
+            //     Debug.Log("space key down");
 
-            }
+            // }
+            // else if (_grounded == true)
+            // {
+            //     yInput = 0f;
 
-            else
-            {
-                yInput = _fallSpeed;
-                // yInput = Input.GetAxis("Vertical");
+            // }
+            // else
+            // {
+            //     yInput = _fallSpeed;
+            //     // yInput = Input.GetAxis("Vertical");
 
-            }
-            animator.SetFloat("ySpeed", yInput);
+            // }
+            // animator.SetFloat("ySpeed", yInput);
             animator.SetFloat("xSpeed", Mathf.Abs(xInput));
 
             rb.velocity = new Vector2(_moveSpeed * xInput, yInput);
@@ -127,21 +138,20 @@ public class Hand : MonoBehaviour
     //     }
     // }
 
-    void CheckGrounded()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, .0f, 1 << 12);
-        Debug.DrawRay(transform.position, -Vector2.up, Color.green);
+    // void CheckGrounded()
+    // {
+    //     RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 3.0f, 1 << 12);
+    //     Debug.DrawRay(transform.position, -Vector2.up, Color.green);
 
-        if (hit.collider != null)
-        {
-
-            _grounded = true;
-        }
-        else
-        {
-            _grounded = false;
-        }
-    }
+    //     if (hit.collider != null)
+    //     {
+    //         _grounded = true;
+    //     }
+    //     else
+    //     {
+    //         _grounded = false;
+    //     }
+    // }
 
 
     void OnCollisionEnter2D(Collision2D other)
@@ -149,6 +159,7 @@ public class Hand : MonoBehaviour
         if (other.transform.name == "Broom")
         {
             moveable = true;
+            UseGravity(0f);
 
         }
     }
@@ -174,8 +185,8 @@ public class Hand : MonoBehaviour
 
         FlipPlayer();
         PlatformerMove();
-        CheckGrounded();
-        Debug.Log("Grounded = " + _grounded);
+        // CheckGrounded();
+        // Debug.Log("Grounded = " + _grounded);
 
         // if (falling == true)
         // {

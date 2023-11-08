@@ -55,7 +55,7 @@ public class BackgroundCaveFall : MonoBehaviour
         if (obj1 == true && obj2 == true && obj3 == true)
         {
             spawnManager.OnPlayerLand();
-            _player.UseGravity();
+            _player.UseGravity(6.5f);
             _anim.SetTrigger("StopFalling");
         }
     }

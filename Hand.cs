@@ -20,7 +20,7 @@ public class Hand : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sp;
     SpriteRenderer spEye;
-
+    private AnimationController_Cave _animationController;
     private Animator animator;
     float xInput;
     float yInput = 0f;
@@ -28,6 +28,7 @@ public class Hand : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _animationController = GetComponent<AnimationController_Cave>();
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 2f;
 
@@ -37,6 +38,7 @@ public class Hand : MonoBehaviour
 
 
     }
+
     void FlipPlayer()
     {
         if (xInput < -0.0001f)
@@ -158,8 +160,9 @@ public class Hand : MonoBehaviour
     {
         if (other.transform.name == "Broom")
         {
+            _animationController.AnimatorWalking();
             moveable = true;
-            UseGravity(0f);
+            // UseGravity(0f);
 
         }
     }

@@ -9,6 +9,7 @@ public class Talk : MonoBehaviour
     private GameObject platform;
     private Text text;
     private int count = 0;
+    private AnimationController_Cave _animationController;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class Talk : MonoBehaviour
         platform = GameObject.Find("Platform");
         text = transform.GetChild(0).GetComponent<Text>();
         text.text = "What is this place?";
+        _animationController = GameObject.Find("Player").transform.GetComponent<AnimationController_Cave>();
 
     }
 
@@ -26,8 +28,9 @@ public class Talk : MonoBehaviour
         {
             case 3:
                 transform.gameObject.SetActive(false);
+                _animationController.AnimatorFalling();
                 platform.SetActive(false);
-                player.UseGravity(5f);
+                player.UseGravity(2f);
                 break;
 
             case 2:

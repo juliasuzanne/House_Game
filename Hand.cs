@@ -30,8 +30,7 @@ public class Hand : MonoBehaviour
     {
         _animationController = GetComponent<AnimationController_Cave>();
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 2f;
-
+        rb.gravityScale = 0f;
         animator = transform.GetComponent<Animator>();
         sp = GetComponent<SpriteRenderer>();
         spEye = transform.GetChild(2).GetComponent<SpriteRenderer>();
@@ -162,7 +161,7 @@ public class Hand : MonoBehaviour
         {
             _animationController.AnimatorWalking();
             moveable = true;
-            // UseGravity(0f);
+            UseGravity(0f);
 
         }
     }

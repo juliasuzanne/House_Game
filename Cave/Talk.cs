@@ -36,6 +36,7 @@ public class Talk : MonoBehaviour
             case 2:
                 text.text = "Is that me?";
                 count = 3;
+                _animationController.AnimatorMakeFist();
                 break;
 
             case 1:

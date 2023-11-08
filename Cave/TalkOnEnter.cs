@@ -47,7 +47,7 @@ public class TalkOnEnter : MonoBehaviour
             {
                 _playerScript.MoveableFalse();
                 _panel.SetActive(true);
-                spEye.color = Color.white;
+                // spEye.color = Color.white;
 
             }
             else if (count == 6)

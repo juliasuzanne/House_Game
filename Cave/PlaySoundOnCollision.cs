@@ -46,7 +46,7 @@ public class PlaySoundOnCollision : MonoBehaviour
 
     void CreateNext()
     {
-        Instantiate(_nextObject, new Vector3(_player.position.x, _player.position.y, 90f), Quaternion.identity);
+        Instantiate(_nextObject, new Vector3(_player.position.x + 2f, _player.position.y + 3f, 90f), Quaternion.identity);
     }
 
 }

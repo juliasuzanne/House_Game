@@ -12,11 +12,14 @@ public class BackgroundCaveFall : MonoBehaviour
     private bool obj3;
 
     private SpawnManager spawnManager;
+    private AnimationController_CaveFall _animationController;
 
 
     // Start is called before the first frame update
     void Start()
     {
+
+        _animationController = GameObject.Find("AnimationController").GetComponent<AnimationController_CaveFall>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         _player = GameObject.Find("Player").GetComponent<Hand>();
         _player.MoveableTrue();
@@ -54,9 +57,10 @@ public class BackgroundCaveFall : MonoBehaviour
     {
         if (obj1 == true && obj2 == true && obj3 == true)
         {
+            _animationController.AnimatorWalking();
+            _anim.SetTrigger("StopFalling");
             spawnManager.OnPlayerLand();
             _player.UseGravity(6.5f);
-            _anim.SetTrigger("StopFalling");
         }
     }
 

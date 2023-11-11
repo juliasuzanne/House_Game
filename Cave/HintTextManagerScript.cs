@@ -21,6 +21,7 @@ public class HintTextManagerScript : MonoBehaviour
     {
         if (_keepInstantiating == true)
         {
+            _keepInstantiating = false;
             StartCoroutine("CreateText");
         }
 
@@ -31,11 +32,11 @@ public class HintTextManagerScript : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Debug.Log("PLAYER COLLISION");
             _keepInstantiating = true;
-
         }
-
     }
+
 
     void OnTriggerExit2D(Collider2D other)
     {
@@ -51,12 +52,12 @@ public class HintTextManagerScript : MonoBehaviour
     IEnumerator CreateText()
     {
         _keepInstantiating = false;
+        Debug.Log("INSTANTIATE");
         Instantiate(textObjectPrefab, new Vector3(_player.position.x + Random.Range(0.2f, 3f), _player.position.y + Random.Range(0.4f, 4f), 90f), Quaternion.identity);
         yield return new WaitForSeconds(3f);
         if (_continue == true)
         {
             _keepInstantiating = true;
-
         }
 
     }

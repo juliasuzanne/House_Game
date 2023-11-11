@@ -8,6 +8,7 @@ public class HintTextManagerScript : MonoBehaviour
     private GameObject textObjectPrefab;
     private Transform _player;
     private bool _keepInstantiating = false;
+    private bool _continue = true;
 
 
     // Start is called before the first frame update
@@ -41,6 +42,7 @@ public class HintTextManagerScript : MonoBehaviour
         if (other.tag == "Player")
         {
             _keepInstantiating = false;
+            _continue = false;
 
         }
 
@@ -49,10 +51,13 @@ public class HintTextManagerScript : MonoBehaviour
     IEnumerator CreateText()
     {
         _keepInstantiating = false;
-        Instantiate(textObjectPrefab, new Vector3(_player.position.x + 2f, _player.position.y + 3f, 90f), Quaternion.identity);
+        Instantiate(textObjectPrefab, new Vector3(_player.position.x + Random.Range(0.2f, 3f), _player.position.y + Random.Range(0.4f, 4f), 90f), Quaternion.identity);
         yield return new WaitForSeconds(3f);
-        Destroy(textObjectPrefab, 4f);
-        _keepInstantiating = true;
+        if (_continue == true)
+        {
+            _keepInstantiating = true;
+
+        }
 
     }
 

@@ -12,6 +12,7 @@ public class PlaySoundOnCollision : MonoBehaviour
     {
         _sound = GetComponent<AudioSource>();
         _sound.Play(0);
+        Destroy(this.gameObject, 4f);
 
     }
 

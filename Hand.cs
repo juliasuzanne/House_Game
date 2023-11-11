@@ -161,7 +161,7 @@ public class Hand : MonoBehaviour
         {
             _animationController.AnimatorWalking();
             moveable = true;
-            UseGravity(0f);
+            UseGravity(2f);
 
         }
     }

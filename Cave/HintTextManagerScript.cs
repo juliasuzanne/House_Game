@@ -42,7 +42,6 @@ public class HintTextManagerScript : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            _keepInstantiating = false;
             _continue = false;
 
         }
@@ -53,7 +52,7 @@ public class HintTextManagerScript : MonoBehaviour
     {
         _keepInstantiating = false;
         Debug.Log("INSTANTIATE");
-        Instantiate(textObjectPrefab, new Vector3(_player.position.x + Random.Range(-2f, 2f), _player.position.y + Random.Range(0f, 4f), 90f), Quaternion.identity);
+        Instantiate(textObjectPrefab, new Vector3(_player.position.x + 1f, _player.position.y + Random.Range(0f, 4f), 90f), Quaternion.identity);
         yield return new WaitForSeconds(3f);
         if (_continue == true)
         {

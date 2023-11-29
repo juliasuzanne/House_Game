@@ -46,9 +46,6 @@ public class Items : MonoBehaviour
         powerup3 = notepaper.transform.GetChild(2).GetComponent<ChangeSprite>();
         _inventory = GameObject.Find("Player").transform.GetComponent<Inventory>();
 
-
-
-
     }
 
     // Update is called once per frame

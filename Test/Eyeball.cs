@@ -13,9 +13,14 @@ public class Eyeball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _iris = transform.GetChild(0).gameObject;
-        _irisPosx = _iris.transform.position.x;
-        _irisPosy = _iris.transform.position.y;
+        _iris = this.gameObject;
+        _irisPosx = _iris.transform.parent.position.x;
+        _irisPosy = _iris.transform.parent.position.y;
+        _xMin = _irisPosx + _xMin;
+        _xMax = _irisPosx + _xMax;
+        _yMin = _irisPosy + _yMin;
+        _yMax = _irisPosy + _yMax;
+
 
     }
 
@@ -28,8 +33,8 @@ public class Eyeball : MonoBehaviour
 
         _distanceX = _iris.transform.position.x + _mousePos.x;
         _distanceY = _iris.transform.position.y + _mousePos.y;
-        _newXPos = _irisPosx + _distanceX * _xScaler;
-        _newYPos = _irisPosy + _distanceY * _yScaler;
+        _newXPos = _irisPosx + (_mousePos.x * _xScaler);
+        _newYPos = _irisPosy + (_mousePos.y * _yScaler);
         if (_newXPos < _xMin)
         {
             _newXPos = _xMin + 0.005f;

@@ -6,6 +6,7 @@ public class Eyeball : MonoBehaviour
 {
     private GameObject _iris;
     private Vector2 _mousePos;
+    private Vector2 _followPos;
     [SerializeField]
     private float _xScaler, _yScaler, _xMin, _xMax, _yMin, _yMax;
     private float _distanceX, _distanceY, _irisPosx, _irisPosy, _newXPos, _newYPos;
@@ -14,8 +15,8 @@ public class Eyeball : MonoBehaviour
     void Start()
     {
         _iris = this.gameObject;
-        _irisPosx = _iris.transform.parent.position.x;
-        _irisPosy = _iris.transform.parent.position.y;
+        _irisPosx = _iris.transform.position.x;
+        _irisPosy = _iris.transform.position.y;
         _xMin = _irisPosx + _xMin;
         _xMax = _irisPosx + _xMax;
         _yMin = _irisPosy + _yMin;
@@ -28,31 +29,34 @@ public class Eyeball : MonoBehaviour
     void Update()
     {
         _mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        _followPos = new Vector2(_mousePos.x - _irisPosx, _mousePos.y - _irisPosy);
 
-        Debug.Log("_iris.transform.position.x: " + _iris.transform.position.x);
+        // Debug.Log("_iris.transform.position.x: " + _iris.transform.position.x);
+        // Debug.Log("DISTANCE X: " + _followPos.x);
+        // Debug.Log("DISTANCE Y: " + _followPos.y);
 
-        _distanceX = _iris.transform.position.x + _mousePos.x;
-        _distanceY = _iris.transform.position.y + _mousePos.y;
-        _newXPos = _irisPosx + (_mousePos.x * _xScaler);
-        _newYPos = _irisPosy + (_mousePos.y * _yScaler);
+        _newXPos = _followPos.x;
+        _newYPos = _followPos.y;
+
         if (_newXPos < _xMin)
         {
-            _newXPos = _xMin + 0.005f;
+            _newXPos = _xMin + 0.05f;
         }
         else if (_newXPos > _xMax)
         {
-            _newXPos = _xMax - 0.005f;
+            _newXPos = _xMax - 0.05f;
         }
+
         if (_newYPos < _yMin)
         {
-            _newYPos = _yMin + 0.005f;
+            _newYPos = _yMin + 0.05f;
         }
         else if (_newYPos > _yMax)
         {
-            _newYPos = _yMax - 0.005f;
+            _newYPos = _yMax - 0.05f;
         }
 
-        _newYPos = _irisPosy + _distanceY * _yScaler;
+        // // _newYPos = _irisPosy + _distanceY * _yScaler;
         _iris.transform.position = new Vector2(_newXPos, _newYPos);
 
 
